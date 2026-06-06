@@ -1,0 +1,17 @@
+# Configuration concurrent — Pixart (EXEMPLE)
+# Ajouter un concurrent = une PR sur ce dossier. Tout est auditable.
+
+name: Pixart
+base_url: https://www.pixartprinting.fr
+
+# Mots-clés de fallback pour la recherche (logique Objets Pub / URL cassée)
+search:
+  endpoint: https://www.pixartprinting.fr/recherche
+  # Termes ajoutés à la requête pour cibler le bon produit
+  keywords_suffix: ''
+
+# Mapping direct SKU interne → URL produit concurrent (cas Print historique).
+# Si une URL casse, fn-discover bascule automatiquement sur la recherche par mots-clés.
+mappings:
+  # SKU_INTERNE: https://www.pixartprinting.fr/...
+  EXEMPLE-CARTE-VISITE-85x55: https://www.pixartprinting.fr/cartes-de-visite/standard/

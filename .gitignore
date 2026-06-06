@@ -1,0 +1,24 @@
+# Dépendances
+node_modules/
+
+# Logs
+*.log
+npm-debug.log*
+
+# Secrets & credentials — JAMAIS commités (cf. Secret Manager + Workload Identity)
+.env
+.env.*
+*-key.json
+gcp-*.json
+service-account*.json
+
+# OS
+.DS_Store
+
+# Éditeurs
+.vscode/
+.idea/
+
+# Build / tmp
+dist/
+tmp/

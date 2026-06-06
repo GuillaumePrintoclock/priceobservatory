@@ -1,0 +1,71 @@
+# Google Cloud Workflows — orchestration du pipeline unifié.
+# Déclenché quotidiennement par Cloud Scheduler (porte d'entrée unique).
+#
+# Pour chaque SKU à suivre : discover → (si résolu) fetch → extract → load
+#                                      → (si non résolu) load (discovery_failures)
+#
+# Squelette à compléter : URLs des functions injectées au déploiement, gestion
+# fine des retries par étape, batching des SKU.
+
+main:
+  params: [input]
+  steps:
+    - init:
+        assign:
+          - skus: ${input.skus} # liste fournie par l'étape de préparation / config
+          - results: []
+
+    - process_each_sku:
+        for:
+          value: item
+          in: ${skus}
+          steps:
+            - discover:
+                call: http.post
+                args:
+                  url: ${sys.get_env("FN_DISCOVER_URL")}
+                  auth: { type: OIDC }
+                  body:
+                    sku: ${item.sku}
+                    concurrent: ${item.concurrent}
+                result: discovered
+
+            - branch_resolved:
+                switch:
+                  - condition: ${discovered.body.resolved == false}
+                    steps:
+                      - log_failure:
+                          call: http.post
+                          args:
+                            url: ${sys.get_env("FN_LOAD_URL")}
+                            auth: { type: OIDC }
+                            body: ${discovered.body}
+                      - skip:
+                          next: continue
+                next: fetch
+
+            - fetch:
+                call: http.post
+                args:
+                  url: ${sys.get_env("FN_FETCH_URL")}
+                  auth: { type: OIDC }
+                  body: ${discovered.body}
+                result: fetched
+
+            - extract:
+                call: http.post
+                args:
+                  url: ${sys.get_env("FN_EXTRACT_URL")}
+                  auth: { type: OIDC }
+                  body: ${fetched.body}
+                result: extracted
+
+            - load:
+                call: http.post
+                args:
+                  url: ${sys.get_env("FN_LOAD_URL")}
+                  auth: { type: OIDC }
+                  body: ${extracted.body}
+
+    - done:
+        return: ${results}
