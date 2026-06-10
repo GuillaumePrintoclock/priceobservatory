@@ -110,6 +110,7 @@ resource "google_bigquery_table" "resolved_urls" {
     { name = "url", type = "STRING", mode = "NULLABLE" },
     { name = "method", type = "STRING", mode = "NULLABLE", description = "search | invalidation" },
     { name = "confidence", type = "FLOAT", mode = "NULLABLE" },
+    { name = "actions", type = "STRING", mode = "NULLABLE", description = "Actions FireCrawl (JSON) pour configurer la page sur la spec" },
     { name = "valid", type = "BOOLEAN", mode = "NULLABLE" },
     { name = "resolved_at", type = "TIMESTAMP", mode = "REQUIRED" },
   ])

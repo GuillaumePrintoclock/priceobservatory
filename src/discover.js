@@ -15,9 +15,10 @@
 //        ou { product_id, competitor_id, resolved: false, stage, reason }
 
 import { getProduct, getCompetitor, loadCompetitorsConfig } from './lib/config.js';
-import { mapSite } from './lib/firecrawl.js';
+import { mapSite, scrape } from './lib/firecrawl.js';
 import { searchTerm } from './lib/keywords.js';
 import { generateJson } from './lib/gemini.js';
+import { extractOptionInventory, deriveActions } from './lib/configure.js';
 import { getCachedUrl, saveResolvedUrl } from './lib/bq.js';
 
 export async function discover(req, res) {
@@ -30,10 +31,17 @@ export async function discover(req, res) {
   const competitor = await getCompetitor(competitorId);
   const base = { product_id: productId, competitor_id: competitorId };
 
-  // 1. Cache
+  // 1. Cache (URL + actions de configuration dérivées à la découverte)
   const cached = await getCachedUrl(productId, competitorId);
   if (cached && (await isAlive(cached.url))) {
-    return res.json({ ...base, url: cached.url, method: 'cache', confidence: cached.confidence, resolved: true });
+    return res.json({
+      ...base,
+      url: cached.url,
+      actions: cached.actions,
+      method: 'cache',
+      confidence: cached.confidence,
+      resolved: true,
+    });
   }
 
   // 2. Cartographie du site concurrent filtrée par terme court (cf. lib/keywords)
@@ -51,9 +59,19 @@ export async function discover(req, res) {
     return res.json({ ...base, resolved: false, stage: 'match', reason: choice?.reason ?? 'aucun_candidat_fiable' });
   }
 
-  // 4. Cache
-  await saveResolvedUrl({ productId, competitorId, url: choice.url, method: 'search', confidence: choice.confidence });
-  return res.json({ ...base, url: choice.url, method: 'search', confidence: choice.confidence, resolved: true });
+  // 4. Page-configurateur ? Dériver les clics qui amènent la page sur la spec
+  //    (inventaire des options data-test → correspondance par Gemini).
+  const { rawHtml } = await scrape(choice.url, { formats: ['rawHtml'] });
+  const inventory = extractOptionInventory(rawHtml);
+  const derived = await deriveActions(product, inventory);
+  if (derived?.incomplete) {
+    return res.json({ ...base, resolved: false, stage: 'configure', reason: derived.reason });
+  }
+  const actions = derived?.actions ?? null;
+
+  // 5. Cache
+  await saveResolvedUrl({ productId, competitorId, url: choice.url, method: 'search', confidence: choice.confidence, actions });
+  return res.json({ ...base, url: choice.url, actions, method: 'search', confidence: choice.confidence, resolved: true });
 }
 
 // Revalidation légère : la page répond et n'est pas retombée sur l'accueil.
@@ -89,7 +107,7 @@ ${candidates.map((c, i) => `${i + 1}. ${c.url}\n   ${c.title}\n   ${c.descriptio
 Choisis l'URL de la page PRODUIT correspondant le mieux à la spécification
 (pas une page catégorie, blog ou accueil). Le format (${product.attributs?.format ?? 'n/a'})
 doit pouvoir correspondre exactement ; matière et finition peuvent être des
-équivalents proches. Si aucun candidat n'est une page produit plausible,
-renvoie url=null avec la raison.`;
+équivalents proches. confidence est un score entre 0 et 1. Si aucun candidat
+n'est une page produit plausible, renvoie url=null avec la raison.`;
   return generateJson(prompt, CHOICE_SCHEMA);
 }

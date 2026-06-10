@@ -33,14 +33,26 @@ export async function mapSite(baseUrl, searchTerm, { limit = 8 } = {}) {
 
 // Scrape → Markdown. maxAge 48 h (cache FireCrawl), waitFor pour les grilles
 // de prix chargées en JS (réglages repris du N8N).
-export async function scrape(url) {
-  const data = await call('/scrape', {
+// `actions` : clics de configuration (pages-configurateurs) — désactive le
+// cache FireCrawl, le rendu dépendant des interactions.
+// `formats` : ['markdown'] par défaut ; ['rawHtml'] pour inventorier les options.
+export async function scrape(url, { actions, formats = ['markdown'] } = {}) {
+  const body = {
     url,
-    formats: ['markdown'],
-    onlyMainContent: true,
-    waitFor: 10000,
-    maxAge: 172800000,
+    formats,
+    onlyMainContent: !formats.includes('rawHtml'),
     location: { country: 'FR', languages: ['fr'] },
-  });
-  return { markdown: data.data?.markdown ?? '', metadata: data.data?.metadata ?? {} };
+  };
+  if (actions?.length) {
+    body.actions = actions;
+  } else {
+    body.waitFor = 10000;
+    body.maxAge = 172800000;
+  }
+  const data = await call('/scrape', body);
+  return {
+    markdown: data.data?.markdown ?? '',
+    rawHtml: data.data?.rawHtml ?? '',
+    metadata: data.data?.metadata ?? {},
+  };
 }

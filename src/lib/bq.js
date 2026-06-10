@@ -10,7 +10,7 @@ const bq = new BigQuery();
 export async function getCachedUrl(productId, competitorId) {
   const [rows] = await bq.query({
     query: `
-      SELECT url, valid, confidence
+      SELECT url, valid, confidence, actions
       FROM \`${DATASET}.resolved_urls\`
       WHERE product_id = @productId AND competitor = @competitorId
       ORDER BY resolved_at DESC
@@ -18,10 +18,11 @@ export async function getCachedUrl(productId, competitorId) {
     params: { productId, competitorId },
   });
   const last = rows[0];
-  return last?.valid ? last : null;
+  if (!last?.valid) return null;
+  return { ...last, actions: last.actions ? JSON.parse(last.actions) : null };
 }
 
-export async function saveResolvedUrl({ productId, competitorId, url, method, confidence, valid = true }) {
+export async function saveResolvedUrl({ productId, competitorId, url, method, confidence, actions = null, valid = true }) {
   await insertRows('resolved_urls', [
     {
       product_id: productId,
@@ -29,6 +30,7 @@ export async function saveResolvedUrl({ productId, competitorId, url, method, co
       url,
       method,
       confidence,
+      actions: actions ? JSON.stringify(actions) : null,
       valid,
       resolved_at: new Date().toISOString(),
     },
