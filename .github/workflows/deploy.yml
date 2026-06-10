@@ -1,13 +1,14 @@
 # CI/CD — Déploiement GCP (Cloud Functions + Workflow)
 #
-# ⚠️ PLACEHOLDER — décision IaC reportée (Terraform vs scripts gcloud, point
-#    d'arbitrage #4 du brief). Le workflow ci-dessous est COMMENTÉ : il ne
-#    s'exécutera pas tant qu'on ne l'a pas activé et complété.
+# IaC : Terraform (décision CTO) — toute l'infra GCP est gérée dans terraform/.
+# Le WIF GitHub ↔ GCP est PROVISIONNÉ (terraform apply du 2026-06-10).
 #
-# Pré-requis avant activation (cf. brief §3.1 / §3.3) :
-#   - Workload Identity Federation GitHub ↔ GCP (pas de clé JSON exportée)
-#   - Secrets repo : GCP_WORKLOAD_IDENTITY_PROVIDER, GCP_SERVICE_ACCOUNT
-#   - Lint vert sur main
+# Le job deploy reste COMMENTÉ tant que :
+#   - le repo n'est pas poussé sur GitHub ;
+#   - les secrets repo ne sont pas créés (valeurs = outputs Terraform) :
+#       GCP_WORKLOAD_IDENTITY_PROVIDER = projects/535402837590/locations/global/workloadIdentityPools/github-pool/providers/github-oidc
+#       GCP_SERVICE_ACCOUNT            = po-deploy@priceobservatory-498507.iam.gserviceaccount.com
+#   - les functions ont un premier code déployable (stubs à implémenter).
 
 name: deploy
 on:

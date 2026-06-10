@@ -22,3 +22,9 @@ service-account*.json
 # Build / tmp
 dist/
 tmp/
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+crash.log
