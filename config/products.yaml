@@ -11,11 +11,18 @@
 defaults:
   # Quantités comparées par défaut (points de la grille tarifaire concurrent)
   quantites: [100, 250, 500, 1000]
-  # Règles de matching candidat ↔ spec
+  # Délais de livraison comparés, en JOURS OUVRÉS (axe critique sur le Print :
+  # les concurrents affichent une grille quantité × date de livraison ; on
+  # convertit chaque date en J+n ouvrés pour aligner avec nos variantes _Jn).
+  # Hérité de l'ancien pipeline Python (np.busday_count + mapping J→J par concurrent).
+  delais: [J1, J3, J5]
+  # Règles de matching candidat ↔ spec (pour trouver la bonne PAGE produit)
   matching:
     strict: [format]                  # correspondance exacte exigée
-    tolerant: [material, finishing]   # équivalence acceptée (ex. 135g ≈ 130–150g) — évaluée par Gemini
-    ignore: [delay, check_service]    # axes internes, sans équivalent concurrent
+    tolerant: [material, finishing]   # équivalence acceptée (ex. 135g interne ≈ "130 g/m" Pixart) — évaluée par Gemini
+    ignore: [check_service]           # axe interne, sans équivalent concurrent
+  # NB : delay n'est PAS un critère de matching de page — c'est une dimension
+  # d'EXTRACTION : fn-extract doit ramener la grille complète quantité × délai.
 
 products:
   # --- MVP : 1 produit × 3 concurrents -------------------------------------

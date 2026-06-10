@@ -9,6 +9,11 @@ competitors:
     nom: Pixartprinting
     base_url: https://www.pixartprinting.fr
     actif: true
+    # Règles héritées de l'ancien pipeline Python (pixart_core.py) — les prix
+    # affichés excluent le port : normalisation pour comparer à périmètre égal.
+    normalisation:
+      frais_port: 4.5                          # € ajoutés à chaque prix
+      supplements: [{ quantite_min: 500, montant: 5 }]
 
   - id: helloprint
     nom: Helloprint
