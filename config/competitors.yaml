@@ -1,0 +1,26 @@
+# ============================================================================
+# Liste DÉFINIE des concurrents surveillés (demande métier : on connaît les
+# sites, pas les pages — fn-discover trouve les pages par recherche).
+# Ajouter un concurrent = une PR sur ce fichier.
+# ============================================================================
+
+competitors:
+  - id: pixart
+    nom: Pixartprinting
+    base_url: https://www.pixartprinting.fr
+    actif: true
+
+  - id: helloprint
+    nom: Helloprint
+    base_url: https://www.helloprint.fr
+    actif: true
+
+  - id: exaprint
+    nom: Exaprint
+    base_url: https://www.exaprint.fr
+    actif: true
+
+# Réglages communs de la recherche
+recherche:
+  mode: firecrawl_search   # recherche FireCrawl restreinte au domaine du concurrent
+  resultats_max: 5         # candidats soumis au matching par produit × concurrent

@@ -1,0 +1,44 @@
+# ============================================================================
+# Watchlist produits — LE fichier que Sacha édite.
+# Chaque entrée décrit UN produit à suivre par sa spécification, jamais par
+# une URL concurrent. fn-discover construit la recherche à partir de la spec,
+# matche le résultat, et gère son cache d'URLs tout seul (table resolved_urls).
+#
+# Les codes d'attributs sont ceux du catalogue Sylius (options de variantes) :
+# ils font le pont entre nos prix internes et la page concurrent trouvée.
+# ============================================================================
+
+defaults:
+  # Quantités comparées par défaut (points de la grille tarifaire concurrent)
+  quantites: [100, 250, 500, 1000]
+  # Règles de matching candidat ↔ spec
+  matching:
+    strict: [format]                  # correspondance exacte exigée
+    tolerant: [material, finishing]   # équivalence acceptée (ex. 135g ≈ 130–150g) — évaluée par Gemini
+    ignore: [delay, check_service]    # axes internes, sans équivalent concurrent
+
+products:
+  # --- MVP : 1 produit × 3 concurrents -------------------------------------
+  - id: flyer-a5-135cb-recto
+    famille: FLY                      # sylius_product.code
+    libelle: "Flyer A5, papier couché brillant 135g, impression recto seul, sans finition"
+    attributs:                        # axes Sylius (option = valeur)
+      format: A5
+      material: 135CB                 # 135G Couché brillant
+      print_side: R                   # Recto seul
+      finishing: NOF                  # Standard (sans finition)
+    quantites: [50, 100, 250, 500, 1000]
+    # mots_cles : facultatif — par défaut générés depuis le libellé + attributs.
+    # Décommenter pour forcer la requête de recherche :
+    # mots_cles: "flyer A5 135g brillant recto"
+
+  # --- Candidats suivants (à valider avec Sacha) ----------------------------
+  # - id: flyer-a6-135cb-recto
+  #   famille: FLY
+  #   libelle: "Flyer A6, papier couché brillant 135g, impression recto seul, sans finition"
+  #   attributs: { format: A6, material: 135CB, print_side: R, finishing: NOF }
+  #
+  # - id: depliant-a4-2volets-350dm
+  #   famille: DEP
+  #   libelle: "Dépliant A4 ouvert / A5 fermé, 2 volets, 350g couché demi-mat, pelliculage mat recto"
+  #   attributs: { material: 350DM, finishing: PMR }
