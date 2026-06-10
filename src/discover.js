@@ -1,59 +1,95 @@
-// fn-discover — Résolution de l'URL à scraper pour un SKU donné.
+// fn-discover — Résout l'URL de la page produit chez un concurrent à partir
+// de la SPÉCIFICATION produit (search-first, zéro URL maintenue à la main).
 //
-// Cascade (cf. brief CTO §2) :
-//   1. SKU a-t-il un mapping URL direct dans la config ? (cas Print historique)
-//   2. URL valide ? (HTTP 200 + page produit reconnue) → résolu
-//   3. URL cassée → fallback recherche par mots-clés (logique Objets Pub)
-//   4. Pas de mapping initial → recherche par mots-clés directe
-//   5. Recherche infructueuse → log dans discovery_failures, skip le SKU
+//   1. Cache resolved_urls → revalidation HTTP légère → fast path
+//   2. Sinon : recherche FireCrawl restreinte au domaine (mots-clés = libellé spec)
+//   3. Gemini choisit le meilleur candidat (snippets vs attributs de la spec)
+//   4. Mise en cache de l'URL retenue
 //
-// Entrée  : { sku, concurrent }
-// Sortie  : { sku, concurrent, url, method: 'mapping'|'search', resolved: true }
-//        ou { sku, concurrent, resolved: false, reason }
+// La vérification fine (la page correspond-elle vraiment à la spec ?) est
+// faite par fn-extract sur le contenu complet — qui invalide le cache en
+// cas de mismatch via fn-load.
+//
+// Entrée  : { product_id, competitor_id }
+// Sortie  : { product_id, competitor_id, url, method: 'cache'|'search', confidence, resolved: true }
+//        ou { product_id, competitor_id, resolved: false, stage, reason }
 
-import { loadConcurrentConfig } from './lib/config.js';
+import { getProduct, getCompetitor, loadCompetitorsConfig } from './lib/config.js';
+import { mapSite } from './lib/firecrawl.js';
+import { searchTerm } from './lib/keywords.js';
+import { generateJson } from './lib/gemini.js';
+import { getCachedUrl, saveResolvedUrl } from './lib/bq.js';
 
 export async function discover(req, res) {
-  const { sku, concurrent } = req.body ?? {};
-  if (!sku || !concurrent) {
-    return res.status(400).json({ error: 'sku et concurrent requis' });
+  const { product_id: productId, competitor_id: competitorId } = req.body ?? {};
+  if (!productId || !competitorId) {
+    return res.status(400).json({ error: 'product_id et competitor_id requis' });
   }
 
-  const config = await loadConcurrentConfig(concurrent);
+  const product = await getProduct(productId);
+  const competitor = await getCompetitor(competitorId);
+  const base = { product_id: productId, competitor_id: competitorId };
 
-  // 1. Mapping direct ?
-  const mapped = config.mappings?.[sku];
-
-  // 2. Tester l'URL mappée
-  if (mapped) {
-    const valid = await isValidProductUrl(mapped);
-    if (valid) {
-      return res.json({ sku, concurrent, url: mapped, method: 'mapping', resolved: true });
-    }
-    // 3. URL cassée → on tombe en fallback recherche (ci-dessous)
+  // 1. Cache
+  const cached = await getCachedUrl(productId, competitorId);
+  if (cached && (await isAlive(cached.url))) {
+    return res.json({ ...base, url: cached.url, method: 'cache', confidence: cached.confidence, resolved: true });
   }
 
-  // 4. Recherche par mots-clés (fallback, ou cas Objets Pub natif)
-  const found = await searchByKeywords(sku, concurrent, config);
-  if (found) {
-    return res.json({ sku, concurrent, url: found, method: 'search', resolved: true });
-  }
-
-  // 5. Échec → fn-load se chargera d'écrire dans discovery_failures
-  return res.json({
-    sku,
-    concurrent,
-    resolved: false,
-    reason: mapped ? 'url_cassee_et_recherche_infructueuse' : 'aucun_resultat_recherche',
+  // 2. Cartographie du site concurrent filtrée par terme court (cf. lib/keywords)
+  const { recherche } = await loadCompetitorsConfig();
+  const candidates = await mapSite(competitor.base_url, searchTerm(product), {
+    limit: recherche?.resultats_max ?? 8,
   });
+  if (candidates.length === 0) {
+    return res.json({ ...base, resolved: false, stage: 'search', reason: 'aucun_resultat' });
+  }
+
+  // 3. Choix du meilleur candidat par Gemini
+  const choice = await pickCandidate(product, competitor, candidates);
+  if (!choice?.url) {
+    return res.json({ ...base, resolved: false, stage: 'match', reason: choice?.reason ?? 'aucun_candidat_fiable' });
+  }
+
+  // 4. Cache
+  await saveResolvedUrl({ productId, competitorId, url: choice.url, method: 'search', confidence: choice.confidence });
+  return res.json({ ...base, url: choice.url, method: 'search', confidence: choice.confidence, resolved: true });
 }
 
-// TODO: HTTP HEAD/GET + heuristique "vraie page produit" (pas de redirection catégorie / 404 maquillée)
-async function isValidProductUrl(_url) {
-  throw new Error('isValidProductUrl: à implémenter');
+// Revalidation légère : la page répond et n'est pas retombée sur l'accueil.
+async function isAlive(url) {
+  try {
+    const res = await fetch(url, { redirect: 'follow', signal: AbortSignal.timeout(10000) });
+    return res.ok && new URL(res.url).pathname.length > 1;
+  } catch {
+    return false;
+  }
 }
 
-// TODO: FireCrawl search / SERP sur les mots-clés du SKU, retourne la meilleure URL produit
-async function searchByKeywords(_sku, _concurrent, _config) {
-  throw new Error('searchByKeywords: à implémenter');
+const CHOICE_SCHEMA = {
+  type: 'object',
+  properties: {
+    url: { type: 'string', nullable: true },
+    confidence: { type: 'number' },
+    reason: { type: 'string' },
+  },
+  required: ['confidence', 'reason'],
+};
+
+async function pickCandidate(product, competitor, candidates) {
+  const prompt = `Tu aides à trouver la page produit d'un site d'imprimerie en ligne.
+
+Produit recherché chez ${competitor.nom} :
+- Libellé : ${product.libelle}
+- Attributs : ${JSON.stringify(product.attributs)}
+
+Résultats de recherche (candidats) :
+${candidates.map((c, i) => `${i + 1}. ${c.url}\n   ${c.title}\n   ${c.description}`).join('\n')}
+
+Choisis l'URL de la page PRODUIT correspondant le mieux à la spécification
+(pas une page catégorie, blog ou accueil). Le format (${product.attributs?.format ?? 'n/a'})
+doit pouvoir correspondre exactement ; matière et finition peuvent être des
+équivalents proches. Si aucun candidat n'est une page produit plausible,
+renvoie url=null avec la raison.`;
+  return generateJson(prompt, CHOICE_SCHEMA);
 }

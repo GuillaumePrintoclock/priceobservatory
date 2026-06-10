@@ -1,24 +1,24 @@
 # Google Cloud Workflows — orchestration du pipeline unifié.
 # Déclenché quotidiennement par Cloud Scheduler (porte d'entrée unique).
 #
-# Pour chaque SKU à suivre : discover → (si résolu) fetch → extract → load
-#                                      → (si non résolu) load (discovery_failures)
+# Pour chaque couple produit × concurrent :
+#   discover → (résolu) fetch → extract → load
+#            → (non résolu OU page non conforme) load (discovery_failures)
 #
-# Squelette à compléter : URLs des functions injectées au déploiement, gestion
-# fine des retries par étape, batching des SKU.
+# input.pairs : [{product_id, competitor_id}, ...] — fourni par le déclencheur
+# (généré depuis config/products.yaml × config/competitors.yaml).
 
 main:
   params: [input]
   steps:
     - init:
         assign:
-          - skus: ${input.skus} # liste fournie par l'étape de préparation / config
-          - results: []
+          - pairs: ${input.pairs}
 
-    - process_each_sku:
+    - process_each_pair:
         for:
-          value: item
-          in: ${skus}
+          value: pair
+          in: ${pairs}
           steps:
             - discover:
                 call: http.post
@@ -26,8 +26,8 @@ main:
                   url: ${sys.get_env("FN_DISCOVER_URL")}
                   auth: { type: OIDC }
                   body:
-                    sku: ${item.sku}
-                    concurrent: ${item.concurrent}
+                    product_id: ${pair.product_id}
+                    competitor_id: ${pair.competitor_id}
                 result: discovered
 
             - branch_resolved:
@@ -60,6 +60,8 @@ main:
                   body: ${fetched.body}
                 result: extracted
 
+            # fn-load gère les 3 cas : offres valides, mismatch (invalide le
+            # cache d'URL), échec — pas de branchement supplémentaire ici.
             - load:
                 call: http.post
                 args:
@@ -68,4 +70,4 @@ main:
                   body: ${extracted.body}
 
     - done:
-        return: ${results}
+        return: "ok"

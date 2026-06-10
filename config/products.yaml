@@ -35,9 +35,9 @@ products:
       print_side: R                   # Recto seul
       finishing: NOF                  # Standard (sans finition)
     quantites: [50, 100, 250, 500, 1000]
-    # mots_cles : facultatif — par défaut générés depuis le libellé + attributs.
-    # Décommenter pour forcer la requête de recherche :
-    # mots_cles: "flyer A5 135g brillant recto"
+    # mots_cles : facultatif — terme COURT pour la cartographie du site
+    # concurrent (défaut : 2 premiers mots du libellé, ex. « Flyer A5 »).
+    # mots_cles: "flyer A5"
 
   # --- Candidats suivants (à valider avec Sacha) ----------------------------
   # - id: flyer-a6-135cb-recto

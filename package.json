@@ -3,12 +3,15 @@
   "version": "0.1.0",
   "private": true,
   "description": "Pipeline unifié de veille tarifaire concurrentielle — Cloud Functions Node.js",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "type": "module",
   "main": "src/index.js",
   "scripts": {
     "lint": "eslint .",
     "format": "prettier --write .",
+    "test": "node --test",
     "start:discover": "functions-framework --target=fnDiscover --signature-type=http",
     "start:fetch": "functions-framework --target=fnFetch --signature-type=http",
     "start:extract": "functions-framework --target=fnExtract --signature-type=http",
@@ -18,8 +21,7 @@
     "@google-cloud/bigquery": "^7",
     "@google-cloud/functions-framework": "^3",
     "@google-cloud/secret-manager": "^5",
-    "@google-cloud/vertexai": "^1",
-    "@mendable/firecrawl-js": "^1",
+    "@google/genai": "^2.8.0",
     "js-yaml": "^4",
     "zod": "^3"
   },

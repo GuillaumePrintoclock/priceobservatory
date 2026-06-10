@@ -1,43 +1,60 @@
-// fn-load — Insertion dans BigQuery.
-//   - offre résolue → competitor_offers_master (partition snapshot_date)
-//   - SKU non résolu → discovery_failures
-//
-// Entrée : offre normalisée (extract) OU { resolved: false, ... } (discover)
+// fn-load — Aiguillage final vers BigQuery.
+//   - offres extraites (matches_spec=true)  → competitor_offers_master (1 ligne par quantité × délai)
+//   - page ne correspondant pas à la spec   → discovery_failures + invalidation du cache d'URL
+//   - échec de découverte (resolved=false)  → discovery_failures
 
-import { BigQuery } from '@google-cloud/bigquery';
-
-const DATASET = process.env.BQ_DATASET ?? 'printoclock_analytics';
-const TABLE_OFFERS = 'competitor_offers_master';
-const TABLE_FAILURES = 'discovery_failures';
-
-const bq = new BigQuery();
+import { insertRows, saveResolvedUrl } from './lib/bq.js';
 
 export async function load(req, res) {
-  const payload = req.body ?? {};
+  const p = req.body ?? {};
+  const today = new Date().toISOString().slice(0, 10);
+  const base = { product_id: p.product_id, competitor: p.competitor_id };
 
-  // Aiguillage : échec de découverte vs offre exploitable
-  if (payload.resolved === false) {
-    await insertRows(TABLE_FAILURES, [
-      {
-        sku: payload.sku,
-        concurrent: payload.concurrent,
-        reason: payload.reason,
-        snapshot_date: today(),
-      },
+  // Échec de découverte
+  if (p.resolved === false) {
+    await insertRows('discovery_failures', [
+      { ...base, failure_date: today, stage: p.stage ?? 'discover', reason: p.reason ?? 'inconnu' },
     ]);
-    return res.json({ status: 'logged_failure', sku: payload.sku });
+    return res.json({ status: 'logged_failure', ...base });
   }
 
-  await insertRows(TABLE_OFFERS, [{ ...payload, snapshot_date: today() }]);
-  return res.json({ status: 'loaded', sku: payload.sku });
-}
+  // Page trouvée mais mauvais produit → log + invalidation cache (re-résolution au prochain run)
+  if (p.matches_spec === false) {
+    await Promise.all([
+      insertRows('discovery_failures', [
+        { ...base, failure_date: today, stage: 'extract_mismatch', reason: p.mismatch_reason ?? 'spec_non_conforme', url: p.url },
+      ]),
+      saveResolvedUrl({
+        productId: p.product_id,
+        competitorId: p.competitor_id,
+        url: p.url,
+        method: 'invalidation',
+        confidence: 0,
+        valid: false,
+      }),
+    ]);
+    return res.json({ status: 'mismatch_logged_and_invalidated', ...base });
+  }
 
-async function insertRows(table, rows) {
-  // TODO: gérer insertId pour l'idempotence (éviter doublons en cas de retry Workflow)
-  await bq.dataset(DATASET).table(table).insert(rows);
-}
-
-function today() {
-  // snapshot_date au format YYYY-MM-DD (clé de partition)
-  return new Date().toISOString().slice(0, 10);
+  // Offres valides
+  if (!Array.isArray(p.offers) || p.offers.length === 0) {
+    return res.status(400).json({ error: 'payload sans offers', ...base });
+  }
+  await insertRows(
+    'competitor_offers_master',
+    p.offers.map((o) => ({
+      snapshot_date: today,
+      ...base,
+      url: p.url,
+      quantite: o.quantite,
+      delai_jours_ouvres: o.delai_jours_ouvres,
+      delai_date: o.delai_date,
+      prix: o.prix,
+      prix_affiche: o.prix_affiche,
+      prix_barre: o.prix_barre,
+      devise: o.devise,
+      prix_ttc: o.prix_ttc,
+    }))
+  );
+  return res.json({ status: 'loaded', count: p.offers.length, ...base });
 }

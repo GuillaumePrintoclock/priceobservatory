@@ -9,11 +9,11 @@
 import { http } from '@google-cloud/functions-framework';
 
 import { discover } from './discover.js';
-import { fetch } from './fetch.js';
+import { fetchPage } from './fetch.js';
 import { extract } from './extract.js';
 import { load } from './load.js';
 
 http('fnDiscover', discover);
-http('fnFetch', fetch);
+http('fnFetch', fetchPage);
 http('fnExtract', extract);
 http('fnLoad', load);
