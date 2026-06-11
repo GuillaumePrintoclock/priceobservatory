@@ -62,11 +62,35 @@ npm run format
 > Auth GCP requise pour les appels réels (BigQuery, Vertex AI, Secret Manager) :
 > `gcloud auth application-default login`
 
+## Cadence & relevés manuels (runbook)
+
+Les deux jobs tournent **tous les lundis** :
+
+| Job | Heure | Mécanisme |
+|---|---|---|
+| Historisation prix internes | lundi 05:00 UTC (07:00 Paris) | Scheduled Query BigQuery |
+| Relevé concurrentiel (171 couples) | lundi 07:30 Paris | Cloud Scheduler → Workflow |
+
+**Relevé concurrentiel manuel** — à tout moment, sans attendre le lundi :
+
+```bash
+scripts/releve.sh                           # tout le périmètre
+scripts/releve.sh fly-a5-135cb-rv           # 1 produit × 3 concurrents
+scripts/releve.sh fly-a5-135cb-rv pixart    # 1 couple précis
+```
+
+**Historisation interne manuelle** :
+
+```bash
+bq mk --transfer_run --run_time="$(date -u +%Y-%m-%dT%H:%M:%SZ)" \
+  projects/535402837590/locations/europe-west9/transferConfigs/6a2891d0-0000-2313-bd08-9898fbb40dd5
+```
+(idempotente : relançable le même jour sans doublons)
+
 ## Quick Win — historisation des prix
 
-Indépendant du pipeline principal, démarrable immédiatement via une **Scheduled Query
-BigQuery**. Voir [`sql/historique_prix_quick_win.sql`](sql/historique_prix_quick_win.sql)
-(inclut le garde-fou d'idempotence).
+Indépendant du pipeline principal, via une **Scheduled Query BigQuery**.
+Voir [`sql/`](sql/) (inclut le garde-fou d'idempotence).
 
 ## État
 

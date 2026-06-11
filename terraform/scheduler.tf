@@ -32,7 +32,7 @@ resource "google_cloud_scheduler_job" "daily_pipeline" {
   # Cloud Scheduler n'est pas disponible en europe-west9 ; le job ne fait
   # qu'un POST vers l'API Workflows, sa région propre est sans incidence.
   region    = "europe-west1"
-  schedule  = "30 7 * * *" # 07:30 Europe/Paris — après l'historisation interne (05:00 UTC = 07:00 Paris)
+  schedule  = "30 7 * * 1" # tous les LUNDIS 07:30 Europe/Paris — après l'historisation interne. Relevé manuel possible à tout moment (cf. README, section Runbook).
   time_zone = "Europe/Paris"
 
   http_target {
