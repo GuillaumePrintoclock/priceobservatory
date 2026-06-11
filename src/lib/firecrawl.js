@@ -4,17 +4,27 @@ import { getSecret } from './config.js';
 
 const BASE = 'https://api.firecrawl.dev/v2';
 
-async function call(path, body) {
+// Timeout explicite + 1 retry : l'API peut pendre sur les scrapes lents
+// (sans ça, on attend les 5 min du timeout par défaut d'undici).
+async function call(path, body, { timeoutMs = 180000, retries = 1 } = {}) {
   const apiKey = await getSecret('FIRECRAWL_API_KEY');
-  const res = await fetch(`${BASE}${path}`, {
-    method: 'POST',
-    headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-    body: JSON.stringify(body),
-  });
-  if (!res.ok) {
-    throw new Error(`FireCrawl ${path} → HTTP ${res.status} : ${(await res.text()).slice(0, 300)}`);
+  for (let attempt = 0; ; attempt++) {
+    try {
+      const res = await fetch(`${BASE}${path}`, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify(body),
+        signal: AbortSignal.timeout(timeoutMs),
+      });
+      if (!res.ok) {
+        throw new Error(`FireCrawl ${path} → HTTP ${res.status} : ${(await res.text()).slice(0, 300)}`);
+      }
+      return await res.json();
+    } catch (e) {
+      const transient = e.name === 'TimeoutError' || e.name === 'AbortError' || e.message?.includes('fetch failed');
+      if (!transient || attempt >= retries) throw e;
+    }
   }
-  return res.json();
 }
 
 // Découverte de pages SUR le site du concurrent : /map liste les URLs du

@@ -66,7 +66,7 @@ export async function extract(req, res) {
   const product = await getProduct(productId);
   const competitor = await getCompetitor(competitorId);
 
-  const raw = await generateJson(buildPrompt(product, markdown), VERTEX_SCHEMA);
+  const raw = await generateJson(buildPrompt(product, sanitizeMarkdown(markdown)), VERTEX_SCHEMA);
   const data = ExtractionSchema.parse(raw); // garde-fou data quality avant BigQuery
 
   const today = new Date();
@@ -89,6 +89,17 @@ export async function extract(req, res) {
     mismatch_reason: data.mismatch_reason ?? null,
     offers,
   });
+}
+
+// Allège le markdown avant envoi à Gemini : les images et URLs interminables
+// sont du bruit pur pour l'extraction (et font pendre le modèle sur les
+// grosses pages). Les liens à URL courte sont conservés — leur slug peut
+// porter du sens (ex. Helloprint encode le délai dans l'URL).
+export function sanitizeMarkdown(markdown) {
+  return markdown
+    .replace(/!\[[^\]]*\]\([^)]*\)/g, '')
+    .replace(/\[([^\]]*)\]\(https?:\/\/[^)]{80,}\)/g, '$1')
+    .replace(/\n{3,}/g, '\n\n');
 }
 
 function buildPrompt(product, markdown) {

@@ -18,7 +18,7 @@ import { getProduct, getCompetitor, loadCompetitorsConfig } from './lib/config.j
 import { mapSite, scrape } from './lib/firecrawl.js';
 import { searchTerm } from './lib/keywords.js';
 import { generateJson } from './lib/gemini.js';
-import { extractOptionInventory, deriveActions } from './lib/configure.js';
+import { extractOptionInventory, deriveActions, deriveConfiguredUrl } from './lib/configure.js';
 import { getCachedUrl, saveResolvedUrl } from './lib/bq.js';
 
 export async function discover(req, res) {
@@ -59,19 +59,29 @@ export async function discover(req, res) {
     return res.json({ ...base, resolved: false, stage: 'match', reason: choice?.reason ?? 'aucun_candidat_fiable' });
   }
 
-  // 4. Page-configurateur ? Dériver les clics qui amènent la page sur la spec
-  //    (inventaire des options data-test → correspondance par Gemini).
-  const { rawHtml } = await scrape(choice.url, { formats: ['rawHtml'] });
+  // 4. Page-configurateur ? Deux stratégies, dans l'ordre :
+  //    a. clics sur options (inventaire data-test → Gemini) — cas Pixart
+  //    b. configuration encodée dans l'URL (grammaire des liens → Gemini) — cas Helloprint
+  //    Aucune des deux → grille statique ou config par défaut, fn-extract tranche (matches_spec).
+  const { rawHtml, markdown } = await scrape(choice.url, { formats: ['rawHtml', 'markdown'] });
+  let finalUrl = choice.url;
+  let actions = null;
+
   const inventory = extractOptionInventory(rawHtml);
-  const derived = await deriveActions(product, inventory);
-  if (derived?.incomplete) {
-    return res.json({ ...base, resolved: false, stage: 'configure', reason: derived.reason });
+  if (inventory.length > 0) {
+    const derived = await deriveActions(product, inventory);
+    if (derived?.incomplete) {
+      return res.json({ ...base, resolved: false, stage: 'configure', reason: derived.reason });
+    }
+    actions = derived?.actions ?? null;
+  } else {
+    const byUrl = await deriveConfiguredUrl(product, markdown, choice.url);
+    if (byUrl?.url && (await isAlive(byUrl.url))) finalUrl = byUrl.url;
   }
-  const actions = derived?.actions ?? null;
 
   // 5. Cache
-  await saveResolvedUrl({ productId, competitorId, url: choice.url, method: 'search', confidence: choice.confidence, actions });
-  return res.json({ ...base, url: choice.url, actions, method: 'search', confidence: choice.confidence, resolved: true });
+  await saveResolvedUrl({ productId, competitorId, url: finalUrl, method: 'search', confidence: choice.confidence, actions });
+  return res.json({ ...base, url: finalUrl, actions, method: 'search', confidence: choice.confidence, resolved: true });
 }
 
 // Revalidation légère : la page répond et n'est pas retombée sur l'accueil.

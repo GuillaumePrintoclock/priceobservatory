@@ -66,3 +66,52 @@ incomplete=true et explique dans reason.`;
   actions.push({ type: 'wait', milliseconds: 4000 });
   return { incomplete: false, actions };
 }
+
+const URL_SCHEMA = {
+  type: 'object',
+  properties: {
+    url: { type: 'string', nullable: true },
+    reason: { type: 'string' },
+  },
+  required: ['reason'],
+};
+
+// Stratégie 2 — configuration par URL (ex. Helloprint : le slug encode
+// format/papier/faces/finition). Gemini déduit la grammaire des liens
+// présents sur la page et compose l'URL de la spec. Le résultat est ensuite
+// validé en aval (HTTP + matches_spec de fn-extract) : une URL fausse est
+// loggée puis invalidée, jamais chargée.
+export async function deriveConfiguredUrl(product, markdown, pageUrl) {
+  // Les liens porteurs de configuration sont les plus « slugués » (beaucoup
+  // de segments) ou contiennent un état de sélection — on les priorise pour
+  // qu'ils survivent au plafond d'échantillonnage.
+  const links = [...new Set([...markdown.matchAll(/\]\((https?:\/\/[^)\s]+)\)/g)].map((m) => m[1]))]
+    .filter((u) => u.startsWith(new URL(pageUrl).origin))
+    .sort((a, b) => score(b) - score(a))
+    .slice(0, 60);
+  if (links.length === 0) return null;
+
+  function score(u) {
+    return (u.includes('#selection') ? 100 : 0) + (u.match(/-/g) ?? []).length;
+  }
+
+  const prompt = `Page produit d'un imprimeur en ligne : ${pageUrl}
+
+Liens internes présents sur la page :
+${links.join('\n')}
+
+Produit voulu :
+- Libellé : ${product.libelle}
+- Attributs : ${JSON.stringify(product.attributs)}
+
+Certains sites encodent la configuration produit (format, papier, faces,
+finition) directement dans l'URL. Si c'est le cas ici (grammaire visible
+dans les liens ci-dessus), compose l'URL correspondant au produit voulu en
+adaptant les segments nécessaires (ex. impression recto seul ↔ jeton de
+type "oneside"). Reste au plus près des jetons observés ; ne change que ce
+qui doit l'être ; omets les segments de quantité/délai s'ils sont optionnels.
+Si la configuration ne passe visiblement pas par l'URL, renvoie url=null.`;
+
+  const out = await generateJson(prompt, URL_SCHEMA);
+  return out.url ? out : null;
+}

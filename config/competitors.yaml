@@ -17,7 +17,9 @@ competitors:
 
   - id: helloprint
     nom: Helloprint
-    base_url: https://www.helloprint.fr
+    # Le site a migré de helloprint.fr vers helloprint.com avec marchés par
+    # chemin — fr-fr = France (fr-be existe aussi, attention au mélange).
+    base_url: https://www.helloprint.com/fr-fr
     actif: true
 
   - id: exaprint

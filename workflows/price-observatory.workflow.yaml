@@ -25,6 +25,7 @@ main:
                 args:
                   url: ${sys.get_env("FN_DISCOVER_URL")}
                   auth: { type: OIDC }
+                  timeout: 550
                   body:
                     product_id: ${pair.product_id}
                     competitor_id: ${pair.competitor_id}
@@ -49,6 +50,7 @@ main:
                 args:
                   url: ${sys.get_env("FN_FETCH_URL")}
                   auth: { type: OIDC }
+                  timeout: 550
                   body: ${discovered.body}
                 result: fetched
 
@@ -57,6 +59,7 @@ main:
                 args:
                   url: ${sys.get_env("FN_EXTRACT_URL")}
                   auth: { type: OIDC }
+                  timeout: 550
                   body: ${fetched.body}
                 result: extracted
 

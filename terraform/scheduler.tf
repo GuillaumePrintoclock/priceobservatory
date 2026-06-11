@@ -25,6 +25,8 @@ resource "google_cloud_scheduler_job" "daily_pipeline" {
       argument = jsonencode({
         pairs = [
           { product_id = "flyer-a5-135cb-recto", competitor_id = "pixart" },
+          { product_id = "flyer-a5-135cb-recto", competitor_id = "helloprint" },
+          { product_id = "flyer-a5-135cb-recto", competitor_id = "exaprint" },
         ]
       })
     }))
