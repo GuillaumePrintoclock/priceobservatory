@@ -91,6 +91,7 @@ resource "google_bigquery_table" "competitor_offers_master" {
     { name = "prix_barre", type = "FLOAT", mode = "NULLABLE", description = "Prix barré (avant promo), le cas échéant" },
     { name = "devise", type = "STRING", mode = "NULLABLE" },
     { name = "prix_ttc", type = "BOOLEAN", mode = "NULLABLE", description = "true=TTC, false=HT, null=non précisé sur la page" },
+    { name = "source", type = "STRING", mode = "NULLABLE", description = "null/pipeline = relevé automatique ; benchmark_sheet = reprise de l'historique mensuel manuel" },
   ])
 }
 

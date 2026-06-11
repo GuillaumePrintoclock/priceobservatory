@@ -43,6 +43,63 @@ products:
     sku_prefix: FLY_135CB_R_NOF_A5_CLA
 
   # --- Périmètre legacy Print (généré depuis printo-gamme-mapping.csv) ------
+  # (+ flyers recto, présents dans le benchmark mensuel mais pas dans le CSV)
+  - id: fly-a6-135cb-r
+    famille: FLY
+    libelle: "Flyer A6, papier 135g couché brillant, impression recto seul, sans finition"
+    attributs: { format: A6, material: 135CB, print_side: R, finishing: NOF }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: FLY_135CB_R_NOF_A6_CLA
+
+  - id: fly-a6-250dm-r
+    famille: FLY
+    libelle: "Flyer A6, papier 250g couché demi-mat, impression recto seul, sans finition"
+    attributs: { format: A6, material: 250DM, print_side: R, finishing: NOF }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: FLY_250DM_R_NOF_A6_CLA
+
+  - id: fly-a6-350dm-r
+    famille: FLY
+    libelle: "Flyer A6, papier 350g couché demi-mat, impression recto seul, sans finition"
+    attributs: { format: A6, material: 350DM, print_side: R, finishing: NOF }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: FLY_350DM_R_NOF_A6_CLA
+
+  - id: fly-a5-250dm-r
+    famille: FLY
+    libelle: "Flyer A5, papier 250g couché demi-mat, impression recto seul, sans finition"
+    attributs: { format: A5, material: 250DM, print_side: R, finishing: NOF }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: FLY_250DM_R_NOF_A5_CLA
+
+  - id: fly-a5-350dm-r
+    famille: FLY
+    libelle: "Flyer A5, papier 350g couché demi-mat, impression recto seul, sans finition"
+    attributs: { format: A5, material: 350DM, print_side: R, finishing: NOF }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: FLY_350DM_R_NOF_A5_CLA
+
+  - id: fly-a4-135cb-r
+    famille: FLY
+    libelle: "Flyer A4, papier 135g couché brillant, impression recto seul, sans finition"
+    attributs: { format: A4, material: 135CB, print_side: R, finishing: NOF }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: FLY_135CB_R_NOF_A4_CLA
+
+  - id: fly-a4-250dm-r
+    famille: FLY
+    libelle: "Flyer A4, papier 250g couché demi-mat, impression recto seul, sans finition"
+    attributs: { format: A4, material: 250DM, print_side: R, finishing: NOF }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: FLY_250DM_R_NOF_A4_CLA
+
+  - id: fly-a4-350dm-r
+    famille: FLY
+    libelle: "Flyer A4, papier 350g couché demi-mat, impression recto seul, sans finition"
+    attributs: { format: A4, material: 350DM, print_side: R, finishing: NOF }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: FLY_350DM_R_NOF_A4_CLA
+
   - id: fly-a6-135cb-rv
     famille: FLY
     libelle: "Flyer A6, papier 135g couché brillant, impression recto-verso, sans finition"
