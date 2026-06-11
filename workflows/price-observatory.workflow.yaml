@@ -19,11 +19,15 @@ main:
         assign:
           - pairs: ${input.pairs}
 
+    # Couples traités en PARALLÈLE (5 branches max — ménage FireCrawl/Gemini) :
+    # ~840 couples le lundi, intenable en séquentiel (~18 h → ~3 h 30).
     - process_each_pair:
-        for:
-          value: pair
-          in: ${pairs}
-          steps:
+        parallel:
+          concurrency_limit: 5
+          for:
+            value: pair
+            in: ${pairs}
+            steps:
             - pair_safe:
                 try:
                   steps:

@@ -27,6 +27,650 @@ competitors:
     base_url: https://www.exaprint.fr
     actif: true
 
+  # Suivis dans le benchmark mensuel historique — ajoutés au pipeline (2026-06-11)
+  - id: saxoprint
+    nom: Saxoprint
+    base_url: https://www.saxoprint.fr
+    actif: true
+
+  - id: easyflyer
+    nom: Easyflyer
+    base_url: https://www.easyflyer.fr
+    actif: true
+
+  # ── Objets publicitaires (générés depuis le Sheet N8N) ────────────
+  # gamme: objetspub → hors périmètre par défaut (produits Print) ;
+  # atteignables uniquement via la liste `concurrents:` d'un produit.
+  - id: 4dimension-fr
+    nom: 4dimension.fr
+    base_url: https://www.4dimension.fr
+    gamme: objetspub
+    actif: true
+
+  - id: 4youcommunication-fr
+    nom: 4youcommunication.fr
+    base_url: https://www.4youcommunication.fr
+    gamme: objetspub
+    actif: true
+
+  - id: agencetapisrouge-com
+    nom: agencetapisrouge.com
+    base_url: https://www.agencetapisrouge.com
+    gamme: objetspub
+    actif: true
+
+  - id: airspire-boutique-fr
+    nom: airspire-boutique.fr
+    base_url: https://www.airspire-boutique.fr
+    gamme: objetspub
+    actif: true
+
+  - id: airspire-fr
+    nom: airspire.fr
+    base_url: https://www.airspire.fr
+    gamme: objetspub
+    actif: true
+
+  - id: ballard-conseil-com
+    nom: ballard-conseil.com
+    base_url: https://www.ballard-conseil.com
+    gamme: objetspub
+    actif: true
+
+  - id: bcm-goodies-com
+    nom: bcm-goodies.com
+    base_url: https://www.bcm-goodies.com
+    gamme: objetspub
+    actif: true
+
+  - id: bergam-fr
+    nom: bergam.fr
+    base_url: https://www.bergam.fr
+    gamme: objetspub
+    actif: true
+
+  - id: bureau-vallee-fr
+    nom: bureau-vallee.fr
+    base_url: https://www.bureau-vallee.fr
+    gamme: objetspub
+    actif: true
+
+  - id: cadactuel-com
+    nom: cadactuel.com
+    base_url: https://www.cadactuel.com
+    gamme: objetspub
+    actif: true
+
+  - id: cadeau-business-fr
+    nom: cadeau-business.fr
+    base_url: https://www.cadeau-business.fr
+    gamme: objetspub
+    actif: true
+
+  - id: cadeauxadler-com
+    nom: cadeauxadler.com
+    base_url: https://www.cadeauxadler.com
+    gamme: objetspub
+    actif: true
+
+  - id: cadoetik-com
+    nom: cadoetik.com
+    base_url: https://www.cadoetik.com
+    gamme: objetspub
+    actif: true
+
+  - id: camaloon-fr
+    nom: camaloon.fr
+    base_url: https://www.camaloon.fr
+    gamme: objetspub
+    actif: true
+
+  - id: capkdo-normandie-fr
+    nom: capkdo-normandie.fr
+    base_url: https://www.capkdo-normandie.fr
+    gamme: objetspub
+    actif: true
+
+  - id: catalogue-groupe-fullace-fr
+    nom: catalogue.groupe-fullace.fr
+    base_url: https://www.catalogue.groupe-fullace.fr
+    gamme: objetspub
+    actif: true
+
+  - id: co-made-fr
+    nom: co-made.fr
+    base_url: https://www.co-made.fr
+    gamme: objetspub
+    actif: true
+
+  - id: comptoirdelobjet-fr
+    nom: comptoirdelobjet.fr
+    base_url: https://www.comptoirdelobjet.fr
+    gamme: objetspub
+    actif: true
+
+  - id: concept-impression-com
+    nom: concept-impression.com
+    base_url: https://www.concept-impression.com
+    gamme: objetspub
+    actif: true
+
+  - id: crafters-fr
+    nom: crafters.fr
+    base_url: https://www.crafters.fr
+    gamme: objetspub
+    actif: true
+
+  - id: dfccom-com
+    nom: dfccom.com
+    base_url: https://www.dfccom.com
+    gamme: objetspub
+    actif: true
+
+  - id: egdiffusion-com
+    nom: egdiffusion.com
+    base_url: https://www.egdiffusion.com
+    gamme: objetspub
+    actif: true
+
+  - id: ekipro-fr
+    nom: ekipro.fr
+    base_url: https://www.ekipro.fr
+    gamme: objetspub
+    actif: true
+
+  - id: flamsandiego-com
+    nom: flamsandiego.com
+    base_url: https://www.flamsandiego.com
+    gamme: objetspub
+    actif: true
+
+  - id: fr-higift-eu
+    nom: fr.higift.eu
+    base_url: https://www.fr.higift.eu
+    gamme: objetspub
+    actif: true
+
+  - id: france-goodies-com
+    nom: france-goodies.com
+    base_url: https://www.france-goodies.com
+    gamme: objetspub
+    actif: true
+
+  - id: fulfiller-com
+    nom: fulfiller.com
+    base_url: https://www.fulfiller.com
+    gamme: objetspub
+    actif: true
+
+  - id: fullcom-fr
+    nom: fullcom.fr
+    base_url: https://www.fullcom.fr
+    gamme: objetspub
+    actif: true
+
+  - id: g2mcom-com
+    nom: g2mcom.com
+    base_url: https://www.g2mcom.com
+    gamme: objetspub
+    actif: true
+
+  - id: geant-beaux-arts-fr
+    nom: geant-beaux-arts.fr
+    base_url: https://www.geant-beaux-arts.fr
+    gamme: objetspub
+    actif: true
+
+  - id: genicado-com
+    nom: genicado.com
+    base_url: https://www.genicado.com
+    gamme: objetspub
+    actif: true
+
+  - id: giffits-fr
+    nom: giffits.fr
+    base_url: https://www.giffits.fr
+    gamme: objetspub
+    actif: true
+
+  - id: giftcampaign-fr
+    nom: giftcampaign.fr
+    base_url: https://www.giftcampaign.fr
+    gamme: objetspub
+    actif: true
+
+  - id: goodact-fr
+    nom: goodact.fr
+    base_url: https://www.goodact.fr
+    gamme: objetspub
+    actif: true
+
+  - id: goodies-promo-fr
+    nom: goodies-promo.fr
+    base_url: https://www.goodies-promo.fr
+    gamme: objetspub
+    actif: true
+
+  - id: goodies-icones-fr
+    nom: goodies.icones.fr
+    base_url: https://www.goodies.icones.fr
+    gamme: objetspub
+    actif: true
+
+  - id: goodiespub-fr
+    nom: goodiespub.fr
+    base_url: https://www.goodiespub.fr
+    gamme: objetspub
+    actif: true
+
+  - id: helice-fr
+    nom: helice.fr
+    base_url: https://www.helice.fr
+    gamme: objetspub
+    actif: true
+
+  - id: hellopro-fr
+    nom: hellopro.fr
+    base_url: https://www.hellopro.fr
+    gamme: objetspub
+    actif: true
+
+  - id: igo-objetspub-fr
+    nom: igo-objetspub.fr
+    base_url: https://www.igo-objetspub.fr
+    gamme: objetspub
+    actif: true
+
+  - id: j-media-fr
+    nom: j-media.fr
+    base_url: https://www.j-media.fr
+    gamme: objetspub
+    actif: true
+
+  - id: kadimage-fr
+    nom: kadimage.fr
+    base_url: https://www.kadimage.fr
+    gamme: objetspub
+    actif: true
+
+  - id: karibanbrands-com
+    nom: karibanbrands.com
+    base_url: https://www.karibanbrands.com
+    gamme: objetspub
+    actif: true
+
+  - id: katanga-fr
+    nom: katanga.fr
+    base_url: https://www.katanga.fr
+    gamme: objetspub
+    actif: true
+
+  - id: kely-fr
+    nom: kely.fr
+    base_url: https://www.kely.fr
+    gamme: objetspub
+    actif: true
+
+  - id: kustomlab-fr
+    nom: kustomlab.fr
+    base_url: https://www.kustomlab.fr
+    gamme: objetspub
+    actif: true
+
+  - id: laboiteaobjets-com
+    nom: laboiteaobjets.com
+    base_url: https://www.laboiteaobjets.com
+    gamme: objetspub
+    actif: true
+
+  - id: lamaisonduteeshirt-com
+    nom: lamaisonduteeshirt.com
+    base_url: https://www.lamaisonduteeshirt.com
+    gamme: objetspub
+    actif: true
+
+  - id: lecadeaudurable-fr
+    nom: lecadeaudurable.fr
+    base_url: https://www.lecadeaudurable.fr
+    gamme: objetspub
+    actif: true
+
+  - id: lignesdirectes-fr
+    nom: lignesdirectes.fr
+    base_url: https://www.lignesdirectes.fr
+    gamme: objetspub
+    actif: true
+
+  - id: lmcommunication-com
+    nom: lmcommunication.com
+    base_url: https://www.lmcommunication.com
+    gamme: objetspub
+    actif: true
+
+  - id: loopper-fr
+    nom: loopper.fr
+    base_url: https://www.loopper.fr
+    gamme: objetspub
+    actif: true
+
+  - id: madamecadeau-fr
+    nom: madamecadeau.fr
+    base_url: https://www.madamecadeau.fr
+    gamme: objetspub
+    actif: true
+
+  - id: mesobjetspublicitaires-com
+    nom: mesobjetspublicitaires.com
+    base_url: https://www.mesobjetspublicitaires.com
+    gamme: objetspub
+    actif: true
+
+  - id: mmix-fr
+    nom: mmix.fr
+    base_url: https://www.mmix.fr
+    gamme: objetspub
+    actif: true
+
+  - id: modyf-fr
+    nom: modyf.fr
+    base_url: https://www.modyf.fr
+    gamme: objetspub
+    actif: true
+
+  - id: multigift-com
+    nom: multigift.com
+    base_url: https://www.multigift.com
+    gamme: objetspub
+    actif: true
+
+  - id: mybambou-com
+    nom: mybambou.com
+    base_url: https://www.mybambou.com
+    gamme: objetspub
+    actif: true
+
+  - id: myobjetpublicitaire-com
+    nom: myobjetpublicitaire.com
+    base_url: https://www.myobjetpublicitaire.com
+    gamme: objetspub
+    actif: true
+
+  - id: needen-fr
+    nom: needen.fr
+    base_url: https://www.needen.fr
+    gamme: objetspub
+    actif: true
+
+  - id: newcom-fr-com
+    nom: newcom-fr.com
+    base_url: https://www.newcom-fr.com
+    gamme: objetspub
+    actif: true
+
+  - id: newscom-shop-com
+    nom: newscom-shop.com
+    base_url: https://www.newscom-shop.com
+    gamme: objetspub
+    actif: true
+
+  - id: notoria-com
+    nom: notoria.com
+    base_url: https://www.notoria.com
+    gamme: objetspub
+    actif: true
+
+  - id: obg-pub
+    nom: obg.pub
+    base_url: https://www.obg.pub
+    gamme: objetspub
+    actif: true
+
+  - id: objetfrancais-pub
+    nom: objetfrancais.pub
+    base_url: https://www.objetfrancais.pub
+    gamme: objetspub
+    actif: true
+
+  - id: objetpubdesign-com
+    nom: objetpubdesign.com
+    base_url: https://www.objetpubdesign.com
+    gamme: objetspub
+    actif: true
+
+  - id: objetpublicitairepremium-com
+    nom: objetpublicitairepremium.com
+    base_url: https://www.objetpublicitairepremium.com
+    gamme: objetspub
+    actif: true
+
+  - id: objetrama-fr
+    nom: objetrama.fr
+    base_url: https://www.objetrama.fr
+    gamme: objetspub
+    actif: true
+
+  - id: objets-personnalisables-com
+    nom: objets-personnalisables.com
+    base_url: https://www.objets-personnalisables.com
+    gamme: objetspub
+    actif: true
+
+  - id: objets-publicitaires-pro-com
+    nom: objets-publicitaires-pro.com
+    base_url: https://www.objets-publicitaires-pro.com
+    gamme: objetspub
+    actif: true
+
+  - id: olacreation-fr
+    nom: olacreation.fr
+    base_url: https://www.olacreation.fr
+    gamme: objetspub
+    actif: true
+
+  - id: omnishirt-fr
+    nom: omnishirt.fr
+    base_url: https://www.omnishirt.fr
+    gamme: objetspub
+    actif: true
+
+  - id: pai-impression-com
+    nom: pai-impression.com
+    base_url: https://www.pai-impression.com
+    gamme: objetspub
+    actif: true
+
+  - id: pandacola-com
+    nom: pandacola.com
+    base_url: https://www.pandacola.com
+    gamme: objetspub
+    actif: true
+
+  - id: parakalo-fr
+    nom: parakalo.fr
+    base_url: https://www.parakalo.fr
+    gamme: objetspub
+    actif: true
+
+  - id: pens-com
+    nom: pens.com
+    base_url: https://www.pens.com
+    gamme: objetspub
+    actif: true
+
+  - id: personaliz-com
+    nom: personaliz.com
+    base_url: https://www.personaliz.com
+    gamme: objetspub
+    actif: true
+
+  - id: ph06-com
+    nom: ph06.com
+    base_url: https://www.ph06.com
+    gamme: objetspub
+    actif: true
+
+  - id: printecom-fr
+    nom: printecom.fr
+    base_url: https://www.printecom.fr
+    gamme: objetspub
+    actif: true
+
+  - id: promedif-produits-com
+    nom: promedif-produits.com
+    base_url: https://www.promedif-produits.com
+    gamme: objetspub
+    actif: true
+
+  - id: promotionice-com
+    nom: promotionice.com
+    base_url: https://www.promotionice.com
+    gamme: objetspub
+    actif: true
+
+  - id: pubavenue-com
+    nom: pubavenue.com
+    base_url: https://www.pubavenue.com
+    gamme: objetspub
+    actif: true
+
+  - id: repli-k-fr
+    nom: repli-k.fr
+    base_url: https://www.repli-k.fr
+    gamme: objetspub
+    actif: true
+
+  - id: sacpub-com
+    nom: sacpub.com
+    base_url: https://www.sacpub.com
+    gamme: objetspub
+    actif: true
+
+  - id: shop-jordenen-com
+    nom: shop.jordenen.com
+    base_url: https://www.shop.jordenen.com
+    gamme: objetspub
+    actif: true
+
+  - id: siddep-fr
+    nom: siddep.fr
+    base_url: https://www.siddep.fr
+    gamme: objetspub
+    actif: true
+
+  - id: sip19-fr
+    nom: sip19.fr
+    base_url: https://www.sip19.fr
+    gamme: objetspub
+    actif: true
+
+  - id: smart-goodies-com
+    nom: smart-goodies.com
+    base_url: https://www.smart-goodies.com
+    gamme: objetspub
+    actif: true
+
+  - id: smartobjet-fr
+    nom: smartobjet.fr
+    base_url: https://www.smartobjet.fr
+    gamme: objetspub
+    actif: true
+
+  - id: stampasi-fr
+    nom: stampasi.fr
+    base_url: https://www.stampasi.fr
+    gamme: objetspub
+    actif: true
+
+  - id: stefica-com
+    nom: stefica.com
+    base_url: https://www.stefica.com
+    gamme: objetspub
+    actif: true
+
+  - id: stylo-france-fr
+    nom: stylo-france.fr
+    base_url: https://www.stylo-france.fr
+    gamme: objetspub
+    actif: true
+
+  - id: stylo-parker-fr
+    nom: stylo-parker.fr
+    base_url: https://www.stylo-parker.fr
+    gamme: objetspub
+    actif: true
+
+  - id: stylos-publicitaires-pro-com
+    nom: stylos-publicitaires-pro.com
+    base_url: https://www.stylos-publicitaires-pro.com
+    gamme: objetspub
+    actif: true
+
+  - id: sublimet-com
+    nom: sublimet.com
+    base_url: https://www.sublimet.com
+    gamme: objetspub
+    actif: true
+
+  - id: tee-shirts-online-com
+    nom: tee-shirts-online.com
+    base_url: https://www.tee-shirts-online.com
+    gamme: objetspub
+    actif: true
+
+  - id: teefactory-fr
+    nom: teefactory.fr
+    base_url: https://www.teefactory.fr
+    gamme: objetspub
+    actif: true
+
+  - id: textile-direct-fr
+    nom: textile-direct.fr
+    base_url: https://www.textile-direct.fr
+    gamme: objetspub
+    actif: true
+
+  - id: toptex-fr
+    nom: toptex.fr
+    base_url: https://www.toptex.fr
+    gamme: objetspub
+    actif: true
+
+  - id: veditex-com
+    nom: veditex.com
+    base_url: https://www.veditex.com
+    gamme: objetspub
+    actif: true
+
+  - id: vegea-com
+    nom: vegea.com
+    base_url: https://www.vegea.com
+    gamme: objetspub
+    actif: true
+
+  - id: versionecologique-com
+    nom: versionecologique.com
+    base_url: https://www.versionecologique.com
+    gamme: objetspub
+    actif: true
+
+  - id: winpub-fr
+    nom: winpub.fr
+    base_url: https://www.winpub.fr
+    gamme: objetspub
+    actif: true
+
+  - id: wordans-fr
+    nom: wordans.fr
+    base_url: https://www.wordans.fr
+    gamme: objetspub
+    actif: true
+
+  - id: zaprinta-fr
+    nom: zaprinta.fr
+    base_url: https://www.zaprinta.fr
+    gamme: objetspub
+    actif: true
+
 # Réglages communs de la recherche
 recherche:
   mode: firecrawl_search   # recherche FireCrawl restreinte au domaine du concurrent

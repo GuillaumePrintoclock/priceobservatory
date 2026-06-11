@@ -51,6 +51,12 @@ resource "google_bigquery_table" "historique_prix_produits" {
       mode        = "NULLABLE"
       description = "Meilleur prix après promo active, en euros"
     },
+    {
+      name        = "source"
+      type        = "STRING"
+      mode        = "NULLABLE"
+      description = "null = snapshot Sylius ; benchmark_sheet = reprise mensuelle manuelle (oct25-mai26)"
+    },
   ])
 }
 

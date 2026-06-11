@@ -7,13 +7,16 @@ locals {
   watchlist   = yamldecode(file("${path.module}/../config/products.yaml"))
   competitors = yamldecode(file("${path.module}/../config/competitors.yaml"))
 
-  active_competitor_ids = [
-    for c in local.competitors.competitors : c.id if try(c.actif, true)
+  # Périmètre par défaut = concurrents Print (gamme implicite). Les produits
+  # Objets Pub portent leur propre panel via `concurrents:` (généré du Sheet N8N).
+  default_competitor_ids = [
+    for c in local.competitors.competitors : c.id
+    if try(c.actif, true) && try(c.gamme, "print") == "print"
   ]
 
   pairs = flatten([
     for p in local.watchlist.products : [
-      for c in local.active_competitor_ids : {
+      for c in try(p.concurrents, local.default_competitor_ids) : {
         product_id    = p.id
         competitor_id = c
       }

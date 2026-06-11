@@ -526,3 +526,935 @@ products:
     quantites: [1, 2, 10]
     delais: [J3]
     sku_prefix: RUE_M1BAN_RUE100_R1000x2000_CLA
+
+  # ── Objets publicitaires (repris du Sheet N8N, panels d'URLs par produit) ──
+  - id: op-pfc-120181
+    famille: OBJETSPUB
+    ref_poc: PFC_120181
+    libelle: "Tote bag Madras en coton"
+    quantites: [50, 100, 250, 500]
+    concurrents: [easyflyer, mesobjetspublicitaires-com, objetpubdesign-com, pens-com]
+
+  - id: op-pfc-106904
+    famille: OBJETSPUB
+    ref_poc: PFC_106904
+    libelle: "Carnet de notes rigide A5"
+    quantites: [50, 100, 250, 500]
+    concurrents: [capkdo-normandie-fr, co-made-fr, igo-objetspub-fr, wordans-fr]
+
+  - id: op-pfc-100671
+    famille: OBJETSPUB
+    ref_poc: PFC_100671
+    libelle: "Isotherme bouteille Cove 500 ml"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadeauxadler-com, giffits-fr, shop-jordenen-com, veditex-com]
+
+  - id: op-pfc-106181
+    famille: OBJETSPUB
+    ref_poc: PFC_106181
+    libelle: "Classic carnet de notes format A5 rigide"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadeau-business-fr, crafters-fr, needen-fr, wordans-fr]
+
+  - id: op-pfc-100494
+    famille: OBJETSPUB
+    ref_poc: PFC_100494
+    libelle: "Bouteille isotherme Vasa 500 ml"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, kadimage-fr, promedif-produits-com, wordans-fr]
+
+  - id: op-pfc-120332
+    famille: OBJETSPUB
+    ref_poc: PFC_120332
+    libelle: "Tote bag Peru 180 g/m² 7L"
+    quantites: [50, 100, 250, 500]
+    concurrents: [helloprint, mesobjetspublicitaires-com, printecom-fr, wordans-fr]
+
+  - id: op-pfc-38666
+    famille: OBJETSPUB
+    ref_poc: PFC_38666
+    libelle: "Casquette 5 panneaux Feniks"
+    quantites: [50, 100, 250, 500]
+    concurrents: [exaprint, igo-objetspub-fr, pens-com, wordans-fr]
+
+  - id: op-pfc-r6424
+    famille: OBJETSPUB
+    ref_poc: PFC_R6424
+    libelle: "Atomic en coton - Unisexe"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, easyflyer, sip19-fr, smartobjet-fr]
+
+  - id: op-pfc-119385
+    famille: OBJETSPUB
+    ref_poc: PFC_119385
+    libelle: "Premium sac à dos Oriole"
+    quantites: [50, 100, 250, 500]
+    concurrents: [easyflyer, exaprint, igo-objetspub-fr, lamaisonduteeshirt-com]
+
+  - id: op-pfc-119411
+    famille: OBJETSPUB
+    ref_poc: PFC_119411
+    libelle: "Tote bag Carolina en coton"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadeauxadler-com, easyflyer, mesobjetspublicitaires-com, pens-com]
+
+  - id: op-pfc-120659
+    famille: OBJETSPUB
+    ref_poc: PFC_120659
+    libelle: "Sac à dos Byron 18L en RPET GRS 15,6\" avec dessus enroulable"
+    quantites: [50, 100, 250, 500]
+    concurrents: [g2mcom-com, giffits-fr, katanga-fr, wordans-fr]
+
+  - id: op-pfc-112053
+    famille: OBJETSPUB
+    ref_poc: PFC_112053
+    libelle: "Viera tablier"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, easyflyer, lamaisonduteeshirt-com, pens-com]
+
+  - id: op-pfc-100377
+    famille: OBJETSPUB
+    ref_poc: PFC_100377
+    libelle: "Mug en céramique 33 cl"
+    quantites: [50, 100, 250, 500]
+    concurrents: [giftcampaign-fr, mesobjetspublicitaires-com, obg-pub]
+
+  - id: op-pfc-21203
+    famille: OBJETSPUB
+    ref_poc: PFC_21203
+    libelle: "Bloc-notes Desk-Mate® A5"
+    quantites: [50, 100, 250, 500]
+    concurrents: [france-goodies-com, mesobjetspublicitaires-com, newcom-fr-com, pens-com]
+
+  - id: op-pfc-106830
+    famille: OBJETSPUB
+    ref_poc: PFC_106830
+    libelle: "Carnet A5 à couverture souple"
+    quantites: [50, 100, 250, 500]
+    concurrents: [mesobjetspublicitaires-com]
+
+  - id: op-pfc-124180
+    famille: OBJETSPUB
+    ref_poc: PFC_124180
+    libelle: "Câble de charge 5-en-1"
+    quantites: [50, 100, 250, 500]
+    concurrents: [laboiteaobjets-com, mesobjetspublicitaires-com, personaliz-com, vegea-com]
+
+  - id: op-pfc-100165
+    famille: OBJETSPUB
+    ref_poc: PFC_100165
+    libelle: "Plaid polaire Huggy personnalisable 150 x 120 cm"
+    quantites: [50, 100, 250, 500]
+    concurrents: [4dimension-fr, bcm-goodies-com, mesobjetspublicitaires-com, objetpubdesign-com]
+
+  - id: op-pfc-107865
+    famille: OBJETSPUB
+    ref_poc: PFC_107865
+    libelle: "Stylo bille Parker Jotter recyclé"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, needen-fr, objetfrancais-pub, stylo-france-fr]
+
+  - id: op-pfc-120135
+    famille: OBJETSPUB
+    ref_poc: PFC_120135
+    libelle: "Tote bag Odessa en coton 220 gr/m² 13L personnalisable"
+    quantites: [50, 100, 250, 500]
+    concurrents: [igo-objetspub-fr, katanga-fr, objets-personnalisables-com, smart-goodies-com]
+
+  - id: op-pfc-106905
+    famille: OBJETSPUB
+    ref_poc: PFC_106905
+    libelle: "Carnet de notes A6 Spectrum"
+    quantites: [50, 100, 250, 500]
+    concurrents: [easyflyer, exaprint, pens-com, repli-k-fr]
+
+  - id: op-pfc-120548
+    famille: OBJETSPUB
+    ref_poc: PFC_120548
+    libelle: "Hoss recyclé GRS sac à dos pour ordinateur portable 15,6\" personnalisable"
+    quantites: [50, 100, 250, 500]
+    concurrents: [4dimension-fr, cadoetik-com, lamaisonduteeshirt-com, tee-shirts-online-com]
+
+  - id: op-pfc-107395
+    famille: OBJETSPUB
+    ref_poc: PFC_107395
+    libelle: "Carnet A5 Nova"
+    quantites: [50, 100, 250, 500]
+    concurrents: [catalogue-groupe-fullace-fr, fullcom-fr, madamecadeau-fr, myobjetpublicitaire-com]
+
+  - id: op-pfc-109077
+    famille: OBJETSPUB
+    ref_poc: PFC_109077
+    libelle: "Parapluie pliable 21 pouces ouverture automatique Wali"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, easyflyer, igo-objetspub-fr, wordans-fr]
+
+  - id: op-pfc-100345
+    famille: OBJETSPUB
+    ref_poc: PFC_100345
+    libelle: "Rétro lunettes de soleil Sun Ray"
+    quantites: [50, 100, 250, 500]
+    concurrents: [capkdo-normandie-fr, catalogue-groupe-fullace-fr, g2mcom-com, promotionice-com]
+
+  - id: op-pfc-120695
+    famille: OBJETSPUB
+    ref_poc: PFC_120695
+    libelle: "Tote bag Madras en coton certifié GRS"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, helloprint, mesobjetspublicitaires-com, wordans-fr]
+
+  - id: op-pfc-109016
+    famille: OBJETSPUB
+    ref_poc: PFC_109016
+    libelle: "Automatique 3 sections 21.5\" Parapluie Alex"
+    quantites: [50, 100, 250, 500]
+    concurrents: [g2mcom-com, giffits-fr, igo-objetspub-fr, wordans-fr]
+
+  - id: op-pfc-102104
+    famille: OBJETSPUB
+    ref_poc: PFC_102104
+    libelle: "Porte-clés à boucle extensible Gerlos"
+    quantites: [50, 100, 250, 500]
+    concurrents: [4youcommunication-fr, g2mcom-com, helice-fr, wordans-fr]
+
+  - id: op-pfc-107763
+    famille: OBJETSPUB
+    ref_poc: PFC_107763
+    libelle: "Carnet A5 Honua"
+    quantites: [50, 100, 250, 500]
+    concurrents: [easyflyer, giffits-fr, kadimage-fr, wordans-fr]
+
+  - id: op-pfc-38028
+    famille: OBJETSPUB
+    ref_poc: PFC_38028
+    libelle: "Heros en coton - Homme"
+    quantites: [50, 100, 250, 500]
+    concurrents: [j-media-fr, mesobjetspublicitaires-com, objetpubdesign-com, pens-com]
+
+  - id: op-pfc-109048
+    famille: OBJETSPUB
+    ref_poc: PFC_109048
+    libelle: "Automatique parapluie 23 pouces"
+    quantites: [50, 100, 250, 500]
+    concurrents: [wordans-fr]
+
+  - id: op-pfc-109053
+    famille: OBJETSPUB
+    ref_poc: PFC_109053
+    libelle: "Automatique 23 pouces Barry parapluie"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, giffits-fr, olacreation-fr]
+
+  - id: op-pfc-102040
+    famille: OBJETSPUB
+    ref_poc: PFC_102040
+    libelle: "Trousse de premiers secours 19 pièces"
+    quantites: [50, 100, 250, 500]
+    concurrents: [exaprint, needen-fr, pandacola-com, vegea-com]
+
+  - id: op-pfc-210470
+    famille: OBJETSPUB
+    ref_poc: PFC_210470
+    libelle: "Lunch box MIYO à deux blocs personnalisable"
+    quantites: [50, 100, 250, 500]
+    concurrents: [bcm-goodies-com, newcom-fr-com, objetpubdesign-com, versionecologique-com]
+
+  - id: op-pfc-38080
+    famille: OBJETSPUB
+    ref_poc: PFC_38080
+    libelle: "Calgary en Coton - Homme"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, hellopro-fr, lamaisonduteeshirt-com, wordans-fr]
+
+  - id: op-pfc-21094
+    famille: OBJETSPUB
+    ref_poc: PFC_21094
+    libelle: "Mémo-autocollants Sticky-Mate® 100x75mm"
+    quantites: [50, 100, 250, 500]
+    concurrents: [igo-objetspub-fr, madamecadeau-fr, shop-jordenen-com, vegea-com]
+
+  - id: op-pfc-21209
+    famille: OBJETSPUB
+    ref_poc: PFC_21209
+    libelle: "Bloc-notes Desk-Mate® A5 avec couverture"
+    quantites: [50, 100, 250, 500]
+    concurrents: [giffits-fr, igo-objetspub-fr, newcom-fr-com, printecom-fr]
+
+  - id: op-pfc-21093
+    famille: OBJETSPUB
+    ref_poc: PFC_21093
+    libelle: "Mémo-autocollants Sticky-Mate® 75x75mm"
+    quantites: [50, 100, 250, 500]
+    concurrents: [igo-objetspub-fr, madamecadeau-fr, shop-jordenen-com, vegea-com]
+
+  - id: op-pfc-120195
+    famille: OBJETSPUB
+    ref_poc: PFC_120195
+    libelle: "Sac polochon coton Cochichuate 25L personnalisable"
+    quantites: [50, 100, 250, 500]
+    concurrents: [4dimension-fr, crafters-fr, igo-objetspub-fr, smart-goodies-com]
+
+  - id: op-pfc-119386
+    famille: OBJETSPUB
+    ref_poc: PFC_119386
+    libelle: "Sac à dos Trend 17L"
+    quantites: [50, 100, 250, 500]
+    concurrents: [france-goodies-com, g2mcom-com, igo-objetspub-fr, wordans-fr]
+
+  - id: op-pfc-106399
+    famille: OBJETSPUB
+    ref_poc: PFC_106399
+    libelle: "Stylo à bille Nash personnalisable"
+    quantites: [50, 100, 250, 500]
+    concurrents: [crafters-fr, easyflyer, exaprint, stylos-publicitaires-pro-com]
+
+  - id: op-pfc-r6432
+    famille: OBJETSPUB
+    ref_poc: PFC_R6432
+    libelle: "Veste softshell Antartida homme"
+    quantites: [50, 100, 250, 500]
+    concurrents: [kustomlab-fr, lamaisonduteeshirt-com, omnishirt-fr, teefactory-fr]
+
+  - id: op-pfc-109052
+    famille: OBJETSPUB
+    ref_poc: PFC_109052
+    libelle: "Pliable compact parapluie Ida 21,5\" personnalisable"
+    quantites: [50, 100, 250, 500]
+    concurrents: [4dimension-fr, agencetapisrouge-com, mesobjetspublicitaires-com, stampasi-fr]
+
+  - id: op-pfc-106268
+    famille: OBJETSPUB
+    ref_poc: PFC_106268
+    libelle: "Carnet de notes recyclé A6 avec stylo"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, camaloon-fr, siddep-fr, versionecologique-com]
+
+  - id: op-pfc-107732
+    famille: OBJETSPUB
+    ref_poc: PFC_107732
+    libelle: "Carnet Cobble A5 spirales carton recyclé papier de pierre personnalisable"
+    quantites: [50, 100, 250, 500]
+    concurrents: [ballard-conseil-com, crafters-fr, printecom-fr, smart-goodies-com]
+
+  - id: op-pfc-210701
+    famille: OBJETSPUB
+    ref_poc: PFC_210701
+    libelle: "Sac Varai 320 g/m² en toile et jute"
+    quantites: [50, 100, 250, 500]
+    concurrents: [exaprint, giffits-fr, madamecadeau-fr, wordans-fr]
+
+  - id: op-pfc-538546
+    famille: OBJETSPUB
+    ref_poc: PFC_538546
+    libelle: "XL gilet de sécurité professionnel"
+    quantites: [50, 100, 250, 500]
+    concurrents: [ekipro-fr, modyf-fr, ph06-com, wordans-fr]
+
+  - id: op-pfc-21202
+    famille: OBJETSPUB
+    ref_poc: PFC_21202
+    libelle: "Bloc-notes Desk-Mate® A4"
+    quantites: [50, 100, 250, 500]
+    concurrents: [comptoirdelobjet-fr, egdiffusion-com, kadimage-fr, winpub-fr]
+
+  - id: op-pfc-106476
+    famille: OBJETSPUB
+    ref_poc: PFC_106476
+    libelle: "Stylo bille Jotter Parker"
+    quantites: [50, 100, 250, 500]
+    concurrents: [bureau-vallee-fr, cadoetik-com, geant-beaux-arts-fr, pens-com]
+
+  - id: op-pfc-100670
+    famille: OBJETSPUB
+    ref_poc: PFC_100670
+    libelle: "Gobelet Lagan de 330 ml en acier inoxydable avec isolation par le vide et couche de cuivre avec couvercle en bambou personnalisable"
+    quantites: [50, 100, 250, 500]
+    concurrents: [france-goodies-com, objets-personnalisables-com, printecom-fr, smart-goodies-com]
+
+  - id: op-pfc-107823
+    famille: OBJETSPUB
+    ref_poc: PFC_107823
+    libelle: "Stylo bille Parker Jotter recyclé"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadactuel-com, objetfrancais-pub, objetrama-fr, stylo-france-fr]
+
+  - id: op-pfc-120113
+    famille: OBJETSPUB
+    ref_poc: PFC_120113
+    libelle: "Premium sac coton Oregon"
+    quantites: [50, 100, 250, 500]
+    concurrents: [giffits-fr, lamaisonduteeshirt-com, repli-k-fr, sacpub-com]
+
+  - id: op-pfc-100790
+    famille: OBJETSPUB
+    ref_poc: PFC_100790
+    libelle: "Bouteille isotherme sous vide Cove 500 ml"
+    quantites: [50, 100, 250, 500]
+    concurrents: [giffits-fr, lecadeaudurable-fr, newcom-fr-com, versionecologique-com]
+
+  - id: op-pfc-38677
+    famille: OBJETSPUB
+    ref_poc: PFC_38677
+    libelle: "Casquette Doyle 5 panneaux"
+    quantites: [50, 100, 250, 500]
+    concurrents: [g2mcom-com, giffits-fr, kadimage-fr, wordans-fr]
+
+  - id: op-pfc-21291
+    famille: OBJETSPUB
+    ref_poc: PFC_21291
+    libelle: "Carnet de notes à spirales A5 Desk-Mate® avec couverture arrière imprimée"
+    quantites: [50, 100, 250, 500]
+    concurrents: [giffits-fr, igo-objetspub-fr, smart-goodies-com, vegea-com]
+
+  - id: op-pfc-100522
+    famille: OBJETSPUB
+    ref_poc: PFC_100522
+    libelle: "Tasse Pix 330 ml style pop pour marquage par sublimation"
+    quantites: [50, 100, 250, 500]
+    concurrents: [g2mcom-com, giffits-fr, igo-objetspub-fr, wordans-fr]
+
+  - id: op-pfc-100736
+    famille: OBJETSPUB
+    ref_poc: PFC_100736
+    libelle: "Bouteille isotherme Vasa en acier inoxydable recyclé 500 ml"
+    quantites: [50, 100, 250, 500]
+    concurrents: [4youcommunication-fr, cadoetik-com, siddep-fr, versionecologique-com]
+
+  - id: op-pfc-r6554
+    famille: OBJETSPUB
+    ref_poc: PFC_R6554
+    libelle: "Beagle en coton - Homme"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, flamsandiego-com, giffits-fr, objetpubdesign-com]
+
+  - id: op-pfc-38668
+    famille: OBJETSPUB
+    ref_poc: PFC_38668
+    libelle: "Casquette sandwich 5 panneaux Styx"
+    quantites: [50, 100, 250, 500]
+    concurrents: [igo-objetspub-fr, pens-com, pixart]
+
+  - id: op-pfc-100288
+    famille: OBJETSPUB
+    ref_poc: PFC_100288
+    libelle: "Bouteille sport Sky 650ml"
+    quantites: [50, 100, 250, 500]
+    concurrents: [4youcommunication-fr, fulfiller-com, kely-fr, objetpubdesign-com]
+
+  - id: op-pfc-106371
+    famille: OBJETSPUB
+    ref_poc: PFC_106371
+    libelle: "Stylo bille corps blanc grip coloré Nash encre noire"
+    quantites: [50, 100, 250, 500]
+    concurrents: [comptoirdelobjet-fr, multigift-com, smart-goodies-com, wordans-fr]
+
+  - id: op-pfc-21251
+    famille: OBJETSPUB
+    ref_poc: PFC_21251
+    libelle: "Carnet Desk-Mate A5 à spirales"
+    quantites: [50, 100, 250, 500]
+    concurrents: [crafters-fr, igo-objetspub-fr, madamecadeau-fr, pens-com]
+
+  - id: op-pfc-119412
+    famille: OBJETSPUB
+    ref_poc: PFC_119412
+    libelle: "Grand sac shopping non tissé Zeus"
+    quantites: [50, 100, 250, 500]
+    concurrents: [lamaisonduteeshirt-com, pandacola-com, sacpub-com, wordans-fr]
+
+  - id: op-pfc-134961
+    famille: OBJETSPUB
+    ref_poc: PFC_134961
+    libelle: "Câble de chargement 3-en-1 avec porte-clés Metal"
+    quantites: [50, 100, 250, 500]
+    concurrents: [dfccom-com, objetpubdesign-com, personaliz-com, vegea-com]
+
+  - id: op-pfc-107105
+    famille: OBJETSPUB
+    ref_poc: PFC_107105
+    libelle: "Stylo bille rétractable en aluminium Moneta"
+    quantites: [50, 100, 250, 500]
+    concurrents: [exaprint, g2mcom-com, giffits-fr, wordans-fr]
+
+  - id: op-pfc-134245
+    famille: OBJETSPUB
+    ref_poc: PFC_134245
+    libelle: "Batterie de secours aluminium 4000 mAh personnalisable"
+    quantites: [50, 100, 250, 500]
+    concurrents: [giftcampaign-fr, objetpubdesign-com, objetrama-fr, vegea-com]
+
+  - id: op-pfc-r0425
+    famille: OBJETSPUB
+    ref_poc: PFC_R0425
+    libelle: "Montecarlo maille piquée à manches courtes en Synthétique - Homme"
+    quantites: [50, 100, 250, 500]
+    concurrents: [g2mcom-com, goodies-promo-fr, stampasi-fr, wordans-fr]
+
+  - id: op-pfc-109042
+    famille: OBJETSPUB
+    ref_poc: PFC_109042
+    libelle: "Golf parapluie 30 pouces poignée EVA"
+    quantites: [50, 100, 250, 500]
+    concurrents: [goodies-promo-fr, goodiespub-fr, hellopro-fr, wordans-fr]
+
+  - id: op-pfc-120085
+    famille: OBJETSPUB
+    ref_poc: PFC_120085
+    libelle: "Sac isotherme Lighthouse 21L"
+    quantites: [50, 100, 250, 500]
+    concurrents: [concept-impression-com, igo-objetspub-fr, lamaisonduteeshirt-com, wordans-fr]
+
+  - id: op-pfc-109143
+    famille: OBJETSPUB
+    ref_poc: PFC_109143
+    libelle: "Pliable parapluie en RPET 21\""
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, igo-objetspub-fr, smartobjet-fr, wordans-fr]
+
+  - id: op-pfc-100656
+    famille: OBJETSPUB
+    ref_poc: PFC_100656
+    libelle: "Bouteille de sport Bodhi 500 ml en verre"
+    quantites: [50, 100, 250, 500]
+    concurrents: [igo-objetspub-fr, kadimage-fr, lignesdirectes-fr, wordans-fr]
+
+  - id: op-pfc-38676
+    famille: OBJETSPUB
+    ref_poc: PFC_38676
+    libelle: "Bonnet avec patch Boreas"
+    quantites: [50, 100, 250, 500]
+    concurrents: [4dimension-fr, easyflyer, objets-publicitaires-pro-com, pixart]
+
+  - id: op-pfc-100588
+    famille: OBJETSPUB
+    ref_poc: PFC_100588
+    libelle: "Bouteille isotherme 590ml Koln"
+    quantites: [50, 100, 250, 500]
+    concurrents: [mesobjetspublicitaires-com, vegea-com, wordans-fr]
+
+  - id: op-pfc-38106
+    famille: OBJETSPUB
+    ref_poc: PFC_38106
+    libelle: "Helios en Coton - Homme"
+    quantites: [50, 100, 250, 500]
+    concurrents: [exaprint, kadimage-fr, objets-personnalisables-com, wordans-fr]
+
+  - id: op-pfc-39435
+    famille: OBJETSPUB
+    ref_poc: PFC_39435
+    libelle: "Bodywarmer duvet Caltha pour homme"
+    quantites: [50, 100, 250, 500]
+    concurrents: [giffits-fr, igo-objetspub-fr, promotionice-com, wordans-fr]
+
+  - id: op-pfc-106907
+    famille: OBJETSPUB
+    ref_poc: PFC_106907
+    libelle: "Carnet de notes A5 à couverture rigide"
+    quantites: [50, 100, 250, 500]
+    concurrents: [goodact-fr, personaliz-com]
+
+  - id: op-pfc-104097
+    famille: OBJETSPUB
+    ref_poc: PFC_104097
+    libelle: "Cutter Hoost"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, crafters-fr, pixart, promotionice-com]
+
+  - id: op-pfc-107135
+    famille: OBJETSPUB
+    ref_poc: PFC_107135
+    libelle: "Carnet de notes blanc A5 Spectrum"
+    quantites: [50, 100, 250, 500]
+    concurrents: [easyflyer, giffits-fr, stampasi-fr, wordans-fr]
+
+  - id: op-pfc-120461
+    famille: OBJETSPUB
+    ref_poc: PFC_120461
+    libelle: "Sac à dos RPET Oriole cordon"
+    quantites: [50, 100, 250, 500]
+    concurrents: [exaprint, giffits-fr, lamaisonduteeshirt-com, stampasi-fr]
+
+  - id: op-pfc-100549
+    famille: OBJETSPUB
+    ref_poc: PFC_100549
+    libelle: "Bouteille sport 510ml isotherme avec cuivre"
+    quantites: [50, 100, 250, 500]
+    concurrents: [giffits-fr, parakalo-fr, vegea-com, wordans-fr]
+
+  - id: op-pfc-100693
+    famille: OBJETSPUB
+    ref_poc: PFC_100693
+    libelle: "Bouteille isotherme 750 ml"
+    quantites: [50, 100, 250, 500]
+    concurrents: [giftcampaign-fr, mesobjetspublicitaires-com, objetrama-fr]
+
+  - id: op-pfc-r6638
+    famille: OBJETSPUB
+    ref_poc: PFC_R6638
+    libelle: "Polo Star en Coton - Homme"
+    quantites: [50, 100, 250, 500]
+    concurrents: [airspire-boutique-fr, airspire-fr, cadoetik-com, objets-personnalisables-com]
+
+  - id: op-pfc-107783
+    famille: OBJETSPUB
+    ref_poc: PFC_107783
+    libelle: "Carnet de notes à spirales A5"
+    quantites: [50, 100, 250, 500]
+    concurrents: [newscom-shop-com, objetrama-fr, personaliz-com]
+
+  - id: op-pfc-r6635
+    famille: OBJETSPUB
+    ref_poc: PFC_R6635
+    libelle: "Poloe Estrella manches longues en Coton - Homme"
+    quantites: [50, 100, 250, 500]
+    concurrents: [airspire-fr, igo-objetspub-fr, pai-impression-com, textile-direct-fr]
+
+  - id: op-pfc-109058
+    famille: OBJETSPUB
+    ref_poc: PFC_109058
+    libelle: "Parapluie pliable Oho 20\""
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, france-goodies-com, igo-objetspub-fr, kely-fr]
+
+  - id: op-pfc-111069
+    famille: OBJETSPUB
+    ref_poc: PFC_111069
+    libelle: "Casquette Trucker 5 panneaux"
+    quantites: [50, 100, 250, 500]
+    concurrents: [genicado-com, karibanbrands-com, lamaisonduteeshirt-com, toptex-fr]
+
+  - id: op-pfc-38679
+    famille: OBJETSPUB
+    ref_poc: PFC_38679
+    libelle: "Casquette sandwich Darton 6 panneaux"
+    quantites: [50, 100, 250, 500]
+    concurrents: [igo-objetspub-fr, notoria-com, pens-com, wordans-fr]
+
+  - id: op-pfc-118018
+    famille: OBJETSPUB
+    ref_poc: PFC_118018
+    libelle: "Porte-clés ouvre-bouteille et canette Tao"
+    quantites: [50, 100, 250, 500]
+    concurrents: [easyflyer, kadimage-fr, pubavenue-com, wordans-fr]
+
+  - id: op-pfc-119434
+    famille: OBJETSPUB
+    ref_poc: PFC_119434
+    libelle: "Sac conférence Orlando personnalisable"
+    quantites: [50, 100, 250, 500]
+    concurrents: [easyflyer, pens-com, siddep-fr, stampasi-fr]
+
+  - id: op-pfc-120233
+    famille: OBJETSPUB
+    ref_poc: PFC_120233
+    libelle: "Sac à dos ordinateur 15.6\" 14L"
+    quantites: [50, 100, 250, 500]
+    concurrents: [goodies-promo-fr, kely-fr, personaliz-com, promotionice-com]
+
+  - id: op-pfc-100508
+    famille: OBJETSPUB
+    ref_poc: PFC_100508
+    libelle: "Bouteille de sport Sky 650ml"
+    quantites: [50, 100, 250, 500]
+    concurrents: [fulfiller-com, kely-fr, lignesdirectes-fr, promotionice-com]
+
+  - id: op-pfc-112712
+    famille: OBJETSPUB
+    ref_poc: PFC_112712
+    libelle: "Reeva tablier de cuisine"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, exaprint, giffits-fr, wordans-fr]
+
+  - id: op-pfc-38662
+    famille: OBJETSPUB
+    ref_poc: PFC_38662
+    libelle: "Bob Solaris"
+    quantites: [50, 100, 250, 500]
+    concurrents: [igo-objetspub-fr, objetrama-fr, pixart, wordans-fr]
+
+  - id: op-pfc-120697
+    famille: OBJETSPUB
+    ref_poc: PFC_120697
+    libelle: "Sac à dos Rise recyclé certifié GRS pour ordinateur portable de 15,6\""
+    quantites: [50, 100, 250, 500]
+    concurrents: [bergam-fr, cadoetik-com, notoria-com, wordans-fr]
+
+  - id: op-pfc-r1067
+    famille: OBJETSPUB
+    ref_poc: PFC_R1067
+    libelle: "Sweat à capuche Urban en Coton - Homme"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, giffits-fr, goodies-promo-fr, objets-personnalisables-com]
+
+  - id: op-pfc-120495
+    famille: OBJETSPUB
+    ref_poc: PFC_120495
+    libelle: "Sac isotherme Oriole"
+    quantites: [50, 100, 250, 500]
+    concurrents: [easyflyer, exaprint, g2mcom-com, pens-com]
+
+  - id: op-pfc-39311
+    famille: OBJETSPUB
+    ref_poc: PFC_39311
+    libelle: "Veste softshell homme Langley"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, igo-objetspub-fr, olacreation-fr, wordans-fr]
+
+  - id: op-pfc-210524
+    famille: OBJETSPUB
+    ref_poc: PFC_210524
+    libelle: "Tapis de souris Brite-Mat®"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, giffits-fr, kadimage-fr, smart-goodies-com]
+
+  - id: op-pfc-109054
+    famille: OBJETSPUB
+    ref_poc: PFC_109054
+    libelle: "Grand parapluie golf 30 pouces Zeke"
+    quantites: [50, 100, 250, 500]
+    concurrents: [igo-objetspub-fr, kely-fr, stampasi-fr, wordans-fr]
+
+  - id: op-pfc-106478
+    famille: OBJETSPUB
+    ref_poc: PFC_106478
+    libelle: "Jotter Parker stylo à bille"
+    quantites: [50, 100, 250, 500]
+    concurrents: [stylo-parker-fr]
+
+  - id: op-pfc-106489
+    famille: OBJETSPUB
+    ref_poc: PFC_106489
+    libelle: "Stylo à bille Urban Parker"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadeau-business-fr, fr-higift-eu, objetrama-fr, stylos-publicitaires-pro-com]
+
+  - id: op-pfc-120217
+    famille: OBJETSPUB
+    ref_poc: PFC_120217
+    libelle: "Sac à dos ordinateur RFID 15\" Vault 16L"
+    quantites: [50, 100, 250, 500]
+    concurrents: [g2mcom-com, smart-goodies-com, vegea-com, wordans-fr]
+
+  - id: op-pfc-134993
+    famille: OBJETSPUB
+    ref_poc: PFC_134993
+    libelle: "Câble de recharge 3-en-1 Troop"
+    quantites: [50, 100, 250, 500]
+    concurrents: [exaprint, giffits-fr, promotionice-com, stampasi-fr]
+
+  - id: op-pfc-210697
+    famille: OBJETSPUB
+    ref_poc: PFC_210697
+    libelle: "Gobelet isolant Brite-Americano® 350 ml avec couvercle anti-fuite"
+    quantites: [50, 100, 250, 500]
+    concurrents: [giffits-fr, kely-fr, madamecadeau-fr, stampasi-fr]
+
+  - id: op-pfc-119179
+    famille: OBJETSPUB
+    ref_poc: PFC_119179
+    libelle: "Panama sac de plage"
+    quantites: [50, 100, 250, 500]
+    concurrents: [lamaisonduteeshirt-com, objetpublicitairepremium-com, pixart, wordans-fr]
+
+  - id: op-pfc-100517
+    famille: OBJETSPUB
+    ref_poc: PFC_100517
+    libelle: "Isotherme bouteille Pinto 750 ml"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, exaprint, fulfiller-com, wordans-fr]
+
+  - id: op-pfc-119855
+    famille: OBJETSPUB
+    ref_poc: PFC_119855
+    libelle: "Sac à dos pour ordinateur 17\" Reso 25L"
+    quantites: [50, 100, 250, 500]
+    concurrents: [igo-objetspub-fr, katanga-fr, promotionice-com, wordans-fr]
+
+  - id: op-pfc-120510
+    famille: OBJETSPUB
+    ref_poc: PFC_120510
+    libelle: "Sac à dos anti-vol Cover en RPET certifié GRS"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, madamecadeau-fr, vegea-com]
+
+  - id: op-pfc-r6421
+    famille: OBJETSPUB
+    ref_poc: PFC_R6421
+    libelle: "Sweat capuche Montblanc zippé en Coton - Unisexe"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, g2mcom-com, giffits-fr, shop-jordenen-com]
+
+  - id: op-pfc-r0427
+    famille: OBJETSPUB
+    ref_poc: PFC_R0427
+    libelle: "Tshirt polyester recyclé Imola manches courtes - Homme"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadactuel-com, cadoetik-com, giffits-fr, sublimet-com]
+
+  - id: op-pfc-106212
+    famille: OBJETSPUB
+    ref_poc: PFC_106212
+    libelle: "Stylo bille bambou Celuk"
+    quantites: [50, 100, 250, 500]
+    concurrents: [igo-objetspub-fr, mmix-fr, pens-com, shop-jordenen-com]
+
+  - id: op-pfc-112809
+    famille: OBJETSPUB
+    ref_poc: PFC_112809
+    libelle: "Plaid polaire sherpa Springwood"
+    quantites: [50, 100, 250, 500]
+    concurrents: [pixart, smart-goodies-com, stefica-com, wordans-fr]
+
+  - id: op-pfc-113191
+    famille: OBJETSPUB
+    ref_poc: PFC_113191
+    libelle: "Couverture polaire molletonnée Lily en RPET certifiée GRS"
+    quantites: [50, 100, 250, 500]
+    concurrents: [igo-objetspub-fr, myobjetpublicitaire-com, promotionice-com, wordans-fr]
+
+  - id: op-pfc-100455
+    famille: OBJETSPUB
+    ref_poc: PFC_100455
+    libelle: "Isotherme mug Geo 350ml"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, capkdo-normandie-fr, objetpubdesign-com, pens-com]
+
+  - id: op-pfc-113334
+    famille: OBJETSPUB
+    ref_poc: PFC_113334
+    libelle: "Tablier ajustable Andrea"
+    quantites: [50, 100, 250, 500]
+    concurrents: [katanga-fr, lamaisonduteeshirt-com, lmcommunication-com, wordans-fr]
+
+  - id: op-pfc-113138
+    famille: OBJETSPUB
+    ref_poc: PFC_113138
+    libelle: "Tablier coton recyclé Pheebs"
+    quantites: [50, 100, 250, 500]
+    concurrents: [exaprint, lamaisonduteeshirt-com, personaliz-com, wordans-fr]
+
+  - id: op-pfc-549390
+    famille: OBJETSPUB
+    ref_poc: PFC_549390
+    libelle: "Sac de voyage Nevada 55L"
+    quantites: [50, 100, 250, 500]
+    concurrents: [exaprint, igo-objetspub-fr, madamecadeau-fr, promotionice-com]
+
+  - id: op-pfc-120131
+    famille: OBJETSPUB
+    ref_poc: PFC_120131
+    libelle: "Tote bag Nevada en coton 100 gr/m² avec poignées de couleur"
+    quantites: [50, 100, 250, 500]
+    concurrents: [igo-objetspub-fr, mesobjetspublicitaires-com, printecom-fr, wordans-fr]
+
+  - id: op-pfc-120678
+    famille: OBJETSPUB
+    ref_poc: PFC_120678
+    libelle: "Sac à dos pour ordinateur portable Joey 15 L en toile recyclée GRS"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, g2mcom-com, giffits-fr, objetpubdesign-com]
+
+  - id: op-pfc-120575
+    famille: OBJETSPUB
+    ref_poc: PFC_120575
+    libelle: "Oregon sac à dos cordon"
+    quantites: [50, 100, 250, 500]
+    concurrents: [easyflyer, exaprint, lamaisonduteeshirt-com, versionecologique-com]
+
+  - id: op-pfc-106322
+    famille: OBJETSPUB
+    ref_poc: PFC_106322
+    libelle: "Bambou stylo bille personnalisable"
+    quantites: [50, 100, 250, 500]
+    concurrents: [camaloon-fr, laboiteaobjets-com, mybambou-com, personaliz-com]
+
+  - id: op-pfc-120710
+    famille: OBJETSPUB
+    ref_poc: PFC_120710
+    libelle: "Tote bag Odessa recyclé"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, igo-objetspub-fr, lamaisonduteeshirt-com, pens-com]
+
+  - id: op-pfc-119218
+    famille: OBJETSPUB
+    ref_poc: PFC_119218
+    libelle: "Sacoche Anchorage 11L"
+    quantites: [50, 100, 250, 500]
+    concurrents: [exaprint, giffits-fr, parakalo-fr, promotionice-com]
+
+  - id: op-pfc-r6681
+    famille: OBJETSPUB
+    ref_poc: PFC_R6681
+    libelle: "Tshirt Stafford en coton - Homme"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, exaprint, igo-objetspub-fr, objets-personnalisables-com]
+
+  - id: op-pfc-100488
+    famille: OBJETSPUB
+    ref_poc: PFC_100488
+    libelle: "Bouteille Thor avec isolation par le vide 650 ml"
+    quantites: [50, 100, 250, 500]
+    concurrents: [giffits-fr, objetpubdesign-com, smart-goodies-com, vegea-com]
+
+  - id: op-pfc-210691
+    famille: OBJETSPUB
+    ref_poc: PFC_210691
+    libelle: "Gobelet isolant recyclé Americano® 350ml"
+    quantites: [50, 100, 250, 500]
+    concurrents: [crafters-fr, giffits-fr, igo-objetspub-fr, vegea-com]
+
+  - id: op-pfc-38667
+    famille: OBJETSPUB
+    ref_poc: PFC_38667
+    libelle: "Casquette 5 panneaux Feniks enfant"
+    quantites: [50, 100, 250, 500]
+    concurrents: [giffits-fr, igo-objetspub-fr, madamecadeau-fr, wordans-fr]
+
+  - id: op-pfc-112810
+    famille: OBJETSPUB
+    ref_poc: PFC_112810
+    libelle: "Plaid Bay en polaire ultra douce"
+    quantites: [50, 100, 250, 500]
+    concurrents: [igo-objetspub-fr, madamecadeau-fr, objets-personnalisables-com, wordans-fr]
+
+  - id: op-pfc-120677
+    famille: OBJETSPUB
+    ref_poc: PFC_120677
+    libelle: "Sac à dos anti-vol ordinateur portable toile recyclée Joey 18L"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, g2mcom-com, giffits-fr, lamaisonduteeshirt-com]
+
+  - id: op-pfc-100732
+    famille: OBJETSPUB
+    ref_poc: PFC_100732
+    libelle: "Isotherme bouteille de sport Thor 750 ml"
+    quantites: [50, 100, 250, 500]
+    concurrents: [exaprint, giffits-fr, madamecadeau-fr, wordans-fr]
+
+  - id: op-pfc-124294
+    famille: OBJETSPUB
+    ref_poc: PFC_124294
+    libelle: "Câble de charge 3-en-1 Bates en paille de blé et liège"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, giffits-fr, loopper-fr, smart-goodies-com]
+
+  - id: op-pfc-210522
+    famille: OBJETSPUB
+    ref_poc: PFC_210522
+    libelle: "Tapis de souris Brite-Mat"
+    quantites: [50, 100, 250, 500]
+    concurrents: [cadoetik-com, exaprint, giffits-fr, smart-goodies-com]
+
+  - id: op-pfc-100752
+    famille: OBJETSPUB
+    ref_poc: PFC_100752
+    libelle: "Flacon à infusion Ocean Bottle"
+    quantites: [50, 100, 250, 500]
+    concurrents: [giffits-fr, madamecadeau-fr, smart-goodies-com, zaprinta-fr]
+
+  - id: op-pfc-38678
+    famille: OBJETSPUB
+    ref_poc: PFC_38678
+    libelle: "Casquette Davis 6 panneaux"
+    quantites: [50, 100, 250, 500]
+    concurrents: [goodies-icones-fr, igo-objetspub-fr, smart-goodies-com, wordans-fr]
