@@ -64,12 +64,12 @@ npm run format
 
 ## Cadence & relevés manuels (runbook)
 
-Les deux jobs tournent **tous les lundis** :
+Les deux jobs tournent **le 1ᵉʳ de chaque mois** (cadence métier) :
 
 | Job | Heure | Mécanisme |
 |---|---|---|
-| Historisation prix internes | lundi 05:00 UTC (07:00 Paris) | Scheduled Query BigQuery |
-| Relevé concurrentiel (171 couples) | lundi 07:30 Paris | Cloud Scheduler → Workflow |
+| Historisation prix internes | 1ᵉʳ du mois, 05:00 UTC (07:00 Paris) | Scheduled Query BigQuery |
+| Relevé concurrentiel (~842 couples) | 1ᵉʳ du mois, 07:30 Paris | Cloud Scheduler → Workflow |
 
 **Relevé concurrentiel manuel** — à tout moment, sans attendre le lundi :
 
