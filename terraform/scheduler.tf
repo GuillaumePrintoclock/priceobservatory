@@ -1,7 +1,25 @@
 # Déclencheur quotidien du pipeline concurrentiel — porte d'entrée unique.
-# Exécute le workflow avec les couples produit × concurrent à traiter.
-# NB : les pairs sont figés ici pour le MVP ; à terme ils seront générés
-# depuis config/products.yaml × competitors.yaml (fn-plan ou étape workflow).
+# Les couples produit × concurrent sont GÉNÉRÉS depuis la config versionnée :
+# ajouter un produit dans products.yaml (ou activer un concurrent) puis
+# `terraform apply` suffit à étendre le périmètre quotidien.
+
+locals {
+  watchlist   = yamldecode(file("${path.module}/../config/products.yaml"))
+  competitors = yamldecode(file("${path.module}/../config/competitors.yaml"))
+
+  active_competitor_ids = [
+    for c in local.competitors.competitors : c.id if try(c.actif, true)
+  ]
+
+  pairs = flatten([
+    for p in local.watchlist.products : [
+      for c in local.active_competitor_ids : {
+        product_id    = p.id
+        competitor_id = c
+      }
+    ]
+  ])
+}
 
 resource "google_project_iam_member" "pipeline_workflows_invoker" {
   project = var.project_id
@@ -22,13 +40,7 @@ resource "google_cloud_scheduler_job" "daily_pipeline" {
     uri         = "https://workflowexecutions.googleapis.com/v1/projects/${var.project_id}/locations/${var.region}/workflows/price-observatory/executions"
 
     body = base64encode(jsonencode({
-      argument = jsonencode({
-        pairs = [
-          { product_id = "flyer-a5-135cb-recto", competitor_id = "pixart" },
-          { product_id = "flyer-a5-135cb-recto", competitor_id = "helloprint" },
-          { product_id = "flyer-a5-135cb-recto", competitor_id = "exaprint" },
-        ]
-      })
+      argument = jsonencode({ pairs = local.pairs })
     }))
 
     oauth_token {

@@ -4,8 +4,13 @@
 # une URL concurrent. fn-discover construit la recherche à partir de la spec,
 # matche le résultat, et gère son cache d'URLs tout seul (table resolved_urls).
 #
-# Les codes d'attributs sont ceux du catalogue Sylius (options de variantes) :
-# ils font le pont entre nos prix internes et la page concurrent trouvée.
+# Les codes d'attributs sont ceux du catalogue Sylius (options de variantes) ;
+# sku_prefix fait le pont avec nos variantes internes (jointure prix via
+# historique_prix_produits.code LIKE sku_prefix + "_Q%").
+#
+# Périmètre actuel = reprise INTÉGRALE du périmètre Print de l'ancien
+# pipeline Python (56 produits, cf. docs/inventaire-legacy.md) + 1 produit
+# test recto. À élaguer/prioriser avec Sacha.
 # ============================================================================
 
 defaults:
@@ -25,27 +30,403 @@ defaults:
   # d'EXTRACTION : fn-extract doit ramener la grille complète quantité × délai.
 
 products:
-  # --- MVP : 1 produit × 3 concurrents -------------------------------------
+  # --- Produit test historique (recto seul — absent du périmètre legacy) ----
   - id: flyer-a5-135cb-recto
-    famille: FLY                      # sylius_product.code
+    famille: FLY
     libelle: "Flyer A5, papier couché brillant 135g, impression recto seul, sans finition"
-    attributs:                        # axes Sylius (option = valeur)
-      format: A5
-      material: 135CB                 # 135G Couché brillant
-      print_side: R                   # Recto seul
-      finishing: NOF                  # Standard (sans finition)
+    attributs: { format: A5, material: 135CB, print_side: R, finishing: NOF }
     quantites: [50, 100, 250, 500, 1000]
-    # mots_cles : facultatif — terme COURT pour la cartographie du site
-    # concurrent (défaut : 2 premiers mots du libellé, ex. « Flyer A5 »).
-    # mots_cles: "flyer A5"
+    sku_prefix: FLY_135CB_R_NOF_A5_CLA
 
-  # --- Candidats suivants (à valider avec Sacha) ----------------------------
-  # - id: flyer-a6-135cb-recto
-  #   famille: FLY
-  #   libelle: "Flyer A6, papier couché brillant 135g, impression recto seul, sans finition"
-  #   attributs: { format: A6, material: 135CB, print_side: R, finishing: NOF }
-  #
-  # - id: depliant-a4-2volets-350dm
-  #   famille: DEP
-  #   libelle: "Dépliant A4 ouvert / A5 fermé, 2 volets, 350g couché demi-mat, pelliculage mat recto"
-  #   attributs: { material: 350DM, finishing: PMR }
+  # --- Périmètre legacy Print (généré depuis printo-gamme-mapping.csv) ------
+  - id: fly-a6-135cb-rv
+    famille: FLY
+    libelle: "Flyer A6, papier 135g couché brillant, impression recto-verso, sans finition"
+    attributs: { format: A6, material: 135CB, print_side: RV, finishing: NOF }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: FLY_135CB_RV_NOF_A6_CLA
+
+  - id: fly-a6-250dm-rv
+    famille: FLY
+    libelle: "Flyer A6, papier 250g couché demi-mat, impression recto-verso, sans finition"
+    attributs: { format: A6, material: 250DM, print_side: RV, finishing: NOF }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: FLY_250DM_RV_NOF_A6_CLA
+
+  - id: fly-a6-350dm-rv
+    famille: FLY
+    libelle: "Flyer A6, papier 350g couché demi-mat, impression recto-verso, sans finition"
+    attributs: { format: A6, material: 350DM, print_side: RV, finishing: NOF }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: FLY_350DM_RV_NOF_A6_CLA
+
+  - id: fly-a5-135cb-rv
+    famille: FLY
+    libelle: "Flyer A5, papier 135g couché brillant, impression recto-verso, sans finition"
+    attributs: { format: A5, material: 135CB, print_side: RV, finishing: NOF }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: FLY_135CB_RV_NOF_A5_CLA
+
+  - id: fly-a5-250dm-rv
+    famille: FLY
+    libelle: "Flyer A5, papier 250g couché demi-mat, impression recto-verso, sans finition"
+    attributs: { format: A5, material: 250DM, print_side: RV, finishing: NOF }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: FLY_250DM_RV_NOF_A5_CLA
+
+  - id: fly-a5-350dm-rv
+    famille: FLY
+    libelle: "Flyer A5, papier 350g couché demi-mat, impression recto-verso, sans finition"
+    attributs: { format: A5, material: 350DM, print_side: RV, finishing: NOF }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: FLY_350DM_RV_NOF_A5_CLA
+
+  - id: fly-a4-135cb-rv
+    famille: FLY
+    libelle: "Flyer A4, papier 135g couché brillant, impression recto-verso, sans finition"
+    attributs: { format: A4, material: 135CB, print_side: RV, finishing: NOF }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: FLY_135CB_RV_NOF_A4_CLA
+
+  - id: fly-a4-250dm-rv
+    famille: FLY
+    libelle: "Flyer A4, papier 250g couché demi-mat, impression recto-verso, sans finition"
+    attributs: { format: A4, material: 250DM, print_side: RV, finishing: NOF }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: FLY_250DM_RV_NOF_A4_CLA
+
+  - id: fly-a4-350dm-rv
+    famille: FLY
+    libelle: "Flyer A4, papier 350g couché demi-mat, impression recto-verso, sans finition"
+    attributs: { format: A4, material: 350DM, print_side: RV, finishing: NOF }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: FLY_350DM_RV_NOF_A4_CLA
+
+  - id: dep-a4-135cb-1ps
+    famille: DEP
+    libelle: "Dépliant 2 volets (1 pli simple), A3 ouvert / A4 fermé, papier 135g couché brillant, impression recto-verso, sans finition"
+    attributs: { format: A3-A4, material: 135CB, print_side: RV, finishing: NOF, pliage: 1PS }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: DEP_135CB_RV_NOF_1PS_CRN_A3-A4_CLA
+
+  - id: dep-a5-135cb-1ps
+    famille: DEP
+    libelle: "Dépliant 2 volets (1 pli simple), A4 ouvert / A5 fermé, papier 135g couché brillant, impression recto-verso, sans finition"
+    attributs: { format: A4-A5, material: 135CB, print_side: RV, finishing: NOF, pliage: 1PS }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: DEP_135CB_RV_NOF_1PS_CRN_A4-A5_CLA
+
+  - id: dep-100x200-135cb-1ps
+    famille: DEP
+    libelle: "Dépliant 2 volets (1 pli simple), 20×20 cm ouvert / 10×20 cm fermé, papier 135g couché brillant, impression recto-verso, sans finition"
+    attributs: { format: 200x200-100x200, material: 135CB, print_side: RV, finishing: NOF, pliage: 1PS }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: DEP_135CB_RV_NOF_1PS_CRN_200x200-100x200_CLA
+
+  - id: dep-99x210-135cb-2pr
+    famille: DEP
+    libelle: "Dépliant 3 volets (2 plis roulés), A4 ouvert / DL 10×21 cm fermé, papier 135g couché brillant, impression recto-verso, sans finition"
+    attributs: { format: 297x210-99x210, material: 135CB, print_side: RV, finishing: NOF, pliage: 2PR }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: DEP_135CB_RV_NOF_2PR_CRN_297x210-99x210_CLA
+
+  - id: dep-150x200-135cb-2pr
+    famille: DEP
+    libelle: "Dépliant 3 volets (2 plis roulés), 45×20 cm ouvert / 15×20 cm fermé, papier 135g couché brillant, impression recto-verso, sans finition"
+    attributs: { format: 450x200-150x200, material: 135CB, print_side: RV, finishing: NOF, pliage: 2PR }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: DEP_135CB_RV_NOF_2PR_CRN_450x200-150x200_CLA
+
+  - id: dep-a5-250dm-1ps
+    famille: DEP
+    libelle: "Dépliant 2 volets (1 pli simple), A4 ouvert / A5 fermé, papier 250g couché demi-mat, impression recto-verso, sans finition"
+    attributs: { format: A4-A5, material: 250DM, print_side: RV, finishing: NOF, pliage: 1PS }
+    quantites: [100, 250, 500, 1000, 2500, 5000, 10000, 20000]
+    sku_prefix: DEP_250DM_RV_NOF_1PS_CRY_A4-A5_CLA
+
+  - id: cvi-85x54-350dm-rv-nof
+    famille: CVI
+    libelle: "Carte de visite 85×54 mm, papier 350g couché demi-mat, impression recto-verso, sans finition"
+    attributs: { format: 85x54, material: 350DM, print_side: RV, finishing: NOF }
+    quantites: [50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: CVI_350DM_RV_NOF_NOSUV_DRT_CRN_85x54_CLA
+
+  - id: cvi-85x54-350dm-rv-pmr
+    famille: CVI
+    libelle: "Carte de visite 85×54 mm, papier 350g couché demi-mat, impression recto-verso, pelliculage mat recto"
+    attributs: { format: 85x54, material: 350DM, print_side: RV, finishing: PMR }
+    quantites: [50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: CVI_350DM_RV_PMR_NOSUV_DRT_CRN_85x54_CLA
+
+  - id: cvi-85x54-350dm-rv-pmrv
+    famille: CVI
+    libelle: "Carte de visite 85×54 mm, papier 350g couché demi-mat, impression recto-verso, pelliculage mat recto-verso"
+    attributs: { format: 85x54, material: 350DM, print_side: RV, finishing: PMRV }
+    quantites: [50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: CVI_350DM_RV_PMRV_NOSUV_DRT_CRN_85x54_CLA
+
+  - id: cvi-85x54-350dm-rv-pstrv
+    famille: CVI
+    libelle: "Carte de visite 85×54 mm, papier 350g couché demi-mat, impression recto-verso, pelliculage soft touch recto-verso"
+    attributs: { format: 85x54, material: 350DM, print_side: RV, finishing: PSTRV }
+    quantites: [50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: CVI_350DM_RV_PSTRV_NOSUV_DRT_CRN_85x54_CLA
+
+  - id: cvi-85x54-350dm-r-nof
+    famille: CVI
+    libelle: "Carte de visite 85×54 mm, papier 350g couché demi-mat, impression recto seul, sans finition"
+    attributs: { format: 85x54, material: 350DM, print_side: R, finishing: NOF }
+    quantites: [50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: CVI_350DM_R_NOF_NOSUV_DRT_CRN_85x54_CLA
+
+  - id: cvi-85x54-350dm-r-pmr
+    famille: CVI
+    libelle: "Carte de visite 85×54 mm, papier 350g couché demi-mat, impression recto seul, pelliculage mat recto"
+    attributs: { format: 85x54, material: 350DM, print_side: R, finishing: PMR }
+    quantites: [50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: CVI_350DM_R_PMR_NOSUV_DRT_CRN_85x54_CLA
+
+  - id: aff-300x400-135cb
+    famille: AFF
+    libelle: "Affiche 30×40 cm, papier 135g couché brillant, impression recto seul, sans finition"
+    attributs: { format: 300x400, material: 135CB, print_side: R, finishing: NOF }
+    quantites: [10, 25, 50, 100, 250, 500, 1000, 5000, 10000]
+    sku_prefix: AFF_135CB_R_NDS_NOF_300x400_CLA
+
+  - id: aff-400x600-135cb
+    famille: AFF
+    libelle: "Affiche 40×60 cm, papier 135g couché brillant, impression recto seul, sans finition"
+    attributs: { format: 400x600, material: 135CB, print_side: R, finishing: NOF }
+    quantites: [10, 25, 50, 100, 250, 500, 1000, 5000, 10000]
+    sku_prefix: AFF_135CB_R_NDS_NOF_400x600_CLA
+
+  - id: aff-700x1000-135cb
+    famille: AFF
+    libelle: "Affiche 70×100 cm, papier 135g couché brillant, impression recto seul, sans finition"
+    attributs: { format: 700x1000, material: 135CB, print_side: R, finishing: NOF }
+    quantites: [10, 25, 50, 100, 250, 500, 1000, 5000, 10000]
+    sku_prefix: AFF_135CB_R_NDS_NOF_700x1000_CLA
+
+  - id: aff-800x1200-135cb
+    famille: AFF
+    libelle: "Affiche 80×120 cm, papier 135g couché brillant, impression recto seul, sans finition"
+    attributs: { format: 800x1200, material: 135CB, print_side: R, finishing: NOF }
+    quantites: [10, 25, 50, 100, 250, 500, 1000, 5000, 10000]
+    sku_prefix: AFF_135CB_R_NDS_NOF_800x1200_CLA
+
+  - id: aff-a1-135cb
+    famille: AFF
+    libelle: "Affiche A1, papier 135g couché brillant, impression recto seul, sans finition"
+    attributs: { format: A1, material: 135CB, print_side: R, finishing: NOF }
+    quantites: [10, 25, 50, 100, 250, 500, 1000, 5000, 10000]
+    sku_prefix: AFF_135CB_R_NDS_NOF_A1_CLA
+
+  - id: aff-300x400-250dm
+    famille: AFF
+    libelle: "Affiche 30×40 cm, papier 250g couché demi-mat, impression recto seul, sans finition"
+    attributs: { format: 300x400, material: 250DM, print_side: R, finishing: NOF }
+    quantites: [10, 25, 50, 100, 250, 500, 1000, 5000, 10000]
+    sku_prefix: AFF_250DM_R_NDS_NOF_300x400_CLA
+
+  - id: bro-piqure-a4-8p
+    famille: BRO
+    libelle: "Brochure agrafée (piqûre métal 2 points), A4 fermé, 8 pages, papier intérieur 135g couché mat, sans couverture"
+    attributs: { format: A4, material: 135CM, reliure: piqure_2_points, pages: 8, couverture: sans }
+    quantites: [25, 50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: BRO_135CM_NOCOVER_NOPL_STAPLNUM-32x45_NOCAL_2PM_SBRA4-A3_CLA
+
+  - id: bro-piqure-a4-16p
+    famille: BRO
+    libelle: "Brochure agrafée (piqûre métal 2 points), A4 fermé, 16 pages, papier intérieur 135g couché mat, sans couverture"
+    attributs: { format: A4, material: 135CM, reliure: piqure_2_points, pages: 16, couverture: sans }
+    quantites: [25, 50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: BRO_135CM_NOCOVER_NOPL_STAPLNUM-32x45_NOCAL_2PM_SBRA4-A3_CLA
+
+  - id: bro-piqure-a4-24p
+    famille: BRO
+    libelle: "Brochure agrafée (piqûre métal 2 points), A4 fermé, 24 pages, papier intérieur 135g couché mat, sans couverture"
+    attributs: { format: A4, material: 135CM, reliure: piqure_2_points, pages: 24, couverture: sans }
+    quantites: [25, 50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: BRO_135CM_NOCOVER_NOPL_STAPLNUM-32x45_NOCAL_2PM_SBRA4-A3_CLA
+
+  - id: bro-piqure-a4-32p
+    famille: BRO
+    libelle: "Brochure agrafée (piqûre métal 2 points), A4 fermé, 32 pages, papier intérieur 135g couché mat, sans couverture"
+    attributs: { format: A4, material: 135CM, reliure: piqure_2_points, pages: 32, couverture: sans }
+    quantites: [25, 50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: BRO_135CM_NOCOVER_NOPL_STAPLNUM-32x45_NOCAL_2PM_SBRA4-A3_CLA
+
+  - id: bro-piqure-a4-48p
+    famille: BRO
+    libelle: "Brochure agrafée (piqûre métal 2 points), A4 fermé, 48 pages, papier intérieur 135g couché mat, sans couverture"
+    attributs: { format: A4, material: 135CM, reliure: piqure_2_points, pages: 48, couverture: sans }
+    quantites: [25, 50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: BRO_135CM_NOCOVER_NOPL_STAPLNUM-32x45_NOCAL_2PM_SBRA4-A3_CLA
+
+  - id: bro-piqure-a5-8p
+    famille: BRO
+    libelle: "Brochure agrafée (piqûre métal 2 points), A5 fermé, 8 pages, papier intérieur 135g couché mat, sans couverture"
+    attributs: { format: A5, material: 135CM, reliure: piqure_2_points, pages: 8, couverture: sans }
+    quantites: [25, 50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: BRO_135CM_NOCOVER_NOPL_STAPLNUM-32x45_NOCAL_2PM_SBRA5-A4_CLA
+
+  - id: bro-piqure-a5-16p
+    famille: BRO
+    libelle: "Brochure agrafée (piqûre métal 2 points), A5 fermé, 16 pages, papier intérieur 135g couché mat, sans couverture"
+    attributs: { format: A5, material: 135CM, reliure: piqure_2_points, pages: 16, couverture: sans }
+    quantites: [25, 50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: BRO_135CM_NOCOVER_NOPL_STAPLNUM-32x45_NOCAL_2PM_SBRA5-A4_CLA
+
+  - id: bro-piqure-a5-24p
+    famille: BRO
+    libelle: "Brochure agrafée (piqûre métal 2 points), A5 fermé, 24 pages, papier intérieur 135g couché mat, sans couverture"
+    attributs: { format: A5, material: 135CM, reliure: piqure_2_points, pages: 24, couverture: sans }
+    quantites: [25, 50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: BRO_135CM_NOCOVER_NOPL_STAPLNUM-32x45_NOCAL_2PM_SBRA5-A4_CLA
+
+  - id: bro-piqure-a5-32p
+    famille: BRO
+    libelle: "Brochure agrafée (piqûre métal 2 points), A5 fermé, 32 pages, papier intérieur 135g couché mat, sans couverture"
+    attributs: { format: A5, material: 135CM, reliure: piqure_2_points, pages: 32, couverture: sans }
+    quantites: [25, 50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: BRO_135CM_NOCOVER_NOPL_STAPLNUM-32x45_NOCAL_2PM_SBRA5-A4_CLA
+
+  - id: bro-piqure-a5-48p
+    famille: BRO
+    libelle: "Brochure agrafée (piqûre métal 2 points), A5 fermé, 48 pages, papier intérieur 135g couché mat, sans couverture"
+    attributs: { format: A5, material: 135CM, reliure: piqure_2_points, pages: 48, couverture: sans }
+    quantites: [25, 50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: BRO_135CM_NOCOVER_NOPL_STAPLNUM-32x45_NOCAL_2PM_SBRA5-A4_CLA
+
+  - id: bro-piqure-a6-16p
+    famille: BRO
+    libelle: "Brochure agrafée (piqûre métal 2 points), A6 fermé, 16 pages, papier intérieur 135g couché mat, sans couverture"
+    attributs: { format: A6, material: 135CM, reliure: piqure_2_points, pages: 16, couverture: sans }
+    quantites: [25, 50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: BRO_135CM_NOCOVER_NOPL_STAPLNUM-32x45_NOCAL_2PM_SBRA6-A5_CLA
+
+  - id: bro-piqure-a6-24p
+    famille: BRO
+    libelle: "Brochure agrafée (piqûre métal 2 points), A6 fermé, 24 pages, papier intérieur 135g couché mat, sans couverture"
+    attributs: { format: A6, material: 135CM, reliure: piqure_2_points, pages: 24, couverture: sans }
+    quantites: [25, 50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: BRO_135CM_NOCOVER_NOPL_STAPLNUM-32x45_NOCAL_2PM_SBRA6-A5_CLA
+
+  - id: bro-piqure-a6-32p
+    famille: BRO
+    libelle: "Brochure agrafée (piqûre métal 2 points), A6 fermé, 32 pages, papier intérieur 135g couché mat, sans couverture"
+    attributs: { format: A6, material: 135CM, reliure: piqure_2_points, pages: 32, couverture: sans }
+    quantites: [25, 50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: BRO_135CM_NOCOVER_NOPL_STAPLNUM-32x45_NOCAL_2PM_SBRA6-A5_CLA
+
+  - id: bro-dcc-a4-92p
+    famille: BRO
+    libelle: "Brochure dos carré collé, A4 fermé, 92 pages, intérieur 135g couché mat, couverture 300g couché brillant pelliculée brillant"
+    attributs: { format: A4, material: 135CM, reliure: dos_carre_colle, pages: 92, couverture: 300g couché brillant pelliculé brillant }
+    quantites: [25, 50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: BRO_135CM_C300CBPB_NOPL_NOSTAPL_NOCAL_DCC_BRA4-A3_CLA
+
+  - id: bro-dcc-a4-164p
+    famille: BRO
+    libelle: "Brochure dos carré collé, A4 fermé, 164 pages, intérieur 135g couché mat, couverture 300g couché brillant pelliculée brillant"
+    attributs: { format: A4, material: 135CM, reliure: dos_carre_colle, pages: 164, couverture: 300g couché brillant pelliculé brillant }
+    quantites: [25, 50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: BRO_135CM_C300CBPB_NOPL_NOSTAPL_NOCAL_DCC_BRA4-A3_CLA
+
+  - id: bro-dcc-a5-92p
+    famille: BRO
+    libelle: "Brochure dos carré collé, A5 fermé, 92 pages, intérieur 135g couché mat, couverture 300g couché brillant pelliculée brillant"
+    attributs: { format: A5, material: 135CM, reliure: dos_carre_colle, pages: 92, couverture: 300g couché brillant pelliculé brillant }
+    quantites: [25, 50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: BRO_135CM_C300CBPB_NOPL_NOSTAPL_NOCAL_DCC_BRA5-A4_CLA
+
+  - id: bro-dcc-a5-164p
+    famille: BRO
+    libelle: "Brochure dos carré collé, A5 fermé, 164 pages, intérieur 135g couché mat, couverture 300g couché brillant pelliculée brillant"
+    attributs: { format: A5, material: 135CM, reliure: dos_carre_colle, pages: 164, couverture: 300g couché brillant pelliculé brillant }
+    quantites: [25, 50, 100, 250, 500, 1000, 2500, 5000, 10000]
+    sku_prefix: BRO_135CM_C300CBPB_NOPL_NOSTAPL_NOCAL_DCC_BRA5-A4_CLA
+
+  - id: bfp-24-r
+    famille: BFP
+    libelle: "Drapeau plume (beach flag) hauteur 2,40 m, voile 550x1900 mm, impression recto seul, avec mât et sac de transport"
+    attributs: { taille: 550x1900, print_side: R, accessoires: mat_et_sac }
+    quantites: [1, 2, 10]
+    sku_prefix: BFP_PLA_R_BFP2-4_MATSAC_BFP550x1900_CLA
+
+  - id: bfp-24-rv
+    famille: BFP
+    libelle: "Drapeau plume (beach flag) hauteur 2,40 m, voile 550x1900 mm, impression recto-verso, avec mât et sac de transport"
+    attributs: { taille: 550x1900, print_side: RV, accessoires: mat_et_sac }
+    quantites: [1, 2, 10]
+    sku_prefix: BFP_PLA_RV_BFP2-4_MATSAC_BFP550x1900_CLA
+
+  - id: bfp-308-r
+    famille: BFP
+    libelle: "Drapeau plume (beach flag) hauteur 3,10 m, voile 780x2470 mm, impression recto seul, avec mât et sac de transport"
+    attributs: { taille: 780x2470, print_side: R, accessoires: mat_et_sac }
+    quantites: [1, 2, 10]
+    sku_prefix: BFP_PLA_R_BFP3-08_MATSAC_BFP780x2470_CLA
+
+  - id: bfp-308-rv
+    famille: BFP
+    libelle: "Drapeau plume (beach flag) hauteur 3,10 m, voile 780x2470 mm, impression recto-verso, avec mât et sac de transport"
+    attributs: { taille: 780x2470, print_side: RV, accessoires: mat_et_sac }
+    quantites: [1, 2, 10]
+    sku_prefix: BFP_PLA_RV_BFP3-08_MATSAC_BFP780x2470_CLA
+
+  - id: ruc-85-stdban
+    famille: RUC
+    libelle: "Roll-up classique 85×200 cm, bâche standard, impression recto, structure avec sac de transport"
+    attributs: { largeur_cm: 85, material: STDBAN, print_side: R }
+    quantites: [1, 2, 10]
+    sku_prefix: RUC_STDBAN_RUC85_R850x2000_CLA
+
+  - id: ruc-100-stdban
+    famille: RUC
+    libelle: "Roll-up classique 100×200 cm, bâche standard, impression recto, structure avec sac de transport"
+    attributs: { largeur_cm: 100, material: STDBAN, print_side: R }
+    quantites: [1, 2, 10]
+    sku_prefix: RUC_STDBAN_RUC100_R1000x2000_CLA
+
+  - id: ruc-85-m1ban
+    famille: RUC
+    libelle: "Roll-up classique 85×200 cm, bâche M1 ignifugée, impression recto, structure avec sac de transport"
+    attributs: { largeur_cm: 85, material: M1BAN, print_side: R }
+    quantites: [1, 2, 10]
+    sku_prefix: RUC_M1BAN_RUC85_R850x2000_CLA
+
+  - id: ruc-100-m1ban
+    famille: RUC
+    libelle: "Roll-up classique 100×200 cm, bâche M1 ignifugée, impression recto, structure avec sac de transport"
+    attributs: { largeur_cm: 100, material: M1BAN, print_side: R }
+    quantites: [1, 2, 10]
+    sku_prefix: RUC_M1BAN_RUC100_R1000x2000_CLA
+
+  - id: rue-85-stdban
+    famille: RUE
+    libelle: "Roll-up éco 85×200 cm, bâche standard, impression recto, structure avec sac de transport"
+    attributs: { largeur_cm: 85, material: STDBAN, print_side: R }
+    quantites: [1, 2, 10]
+    sku_prefix: RUE_STDBAN_RUE85_R850x2000_CLA
+
+  - id: rue-100-stdban
+    famille: RUE
+    libelle: "Roll-up éco 100×200 cm, bâche standard, impression recto, structure avec sac de transport"
+    attributs: { largeur_cm: 100, material: STDBAN, print_side: R }
+    quantites: [1, 2, 10]
+    sku_prefix: RUE_STDBAN_RUE100_R1000x2000_CLA
+
+  - id: rue-85-m1ban
+    famille: RUE
+    libelle: "Roll-up éco 85×200 cm, bâche M1 ignifugée, impression recto, structure avec sac de transport"
+    attributs: { largeur_cm: 85, material: M1BAN, print_side: R }
+    quantites: [1, 2, 10]
+    sku_prefix: RUE_M1BAN_RUE85_R850x2000_CLA
+
+  - id: rue-100-m1ban
+    famille: RUE
+    libelle: "Roll-up éco 100×200 cm, bâche M1 ignifugée, impression recto, structure avec sac de transport"
+    attributs: { largeur_cm: 100, material: M1BAN, print_side: R }
+    quantites: [1, 2, 10]
+    sku_prefix: RUE_M1BAN_RUE100_R1000x2000_CLA

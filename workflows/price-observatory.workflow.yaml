@@ -5,8 +5,12 @@
 #   discover → (résolu) fetch → extract → load
 #            → (non résolu OU page non conforme) load (discovery_failures)
 #
-# input.pairs : [{product_id, competitor_id}, ...] — fourni par le déclencheur
-# (généré depuis config/products.yaml × config/competitors.yaml).
+# Chaque couple est isolé dans un try/except : un échec est loggé dans
+# discovery_failures (via fn-load) et le run CONTINUE — indispensable à
+# l'échelle (57 produits × 3 concurrents).
+#
+# input.pairs : [{product_id, competitor_id}, ...] — généré par Terraform
+# depuis config/products.yaml × config/competitors.yaml (cf. scheduler.tf).
 
 main:
   params: [input]
@@ -20,57 +24,78 @@ main:
           value: pair
           in: ${pairs}
           steps:
-            - discover:
-                call: http.post
-                args:
-                  url: ${sys.get_env("FN_DISCOVER_URL")}
-                  auth: { type: OIDC }
-                  timeout: 550
-                  body:
-                    product_id: ${pair.product_id}
-                    competitor_id: ${pair.competitor_id}
-                result: discovered
+            - pair_safe:
+                try:
+                  steps:
+                    - discover:
+                        call: http.post
+                        args:
+                          url: ${sys.get_env("FN_DISCOVER_URL")}
+                          auth: { type: OIDC }
+                          timeout: 550
+                          body:
+                            product_id: ${pair.product_id}
+                            competitor_id: ${pair.competitor_id}
+                        result: discovered
 
-            - branch_resolved:
-                switch:
-                  - condition: ${discovered.body.resolved == false}
-                    steps:
-                      - log_failure:
-                          call: http.post
-                          args:
-                            url: ${sys.get_env("FN_LOAD_URL")}
-                            auth: { type: OIDC }
-                            body: ${discovered.body}
-                      - skip:
-                          next: continue
-                next: fetch
+                    - branch_resolved:
+                        switch:
+                          - condition: ${discovered.body.resolved == false}
+                            steps:
+                              - log_failure:
+                                  call: http.post
+                                  args:
+                                    url: ${sys.get_env("FN_LOAD_URL")}
+                                    auth: { type: OIDC }
+                                    body: ${discovered.body}
+                              - skip:
+                                  next: continue
+                        next: fetch
 
-            - fetch:
-                call: http.post
-                args:
-                  url: ${sys.get_env("FN_FETCH_URL")}
-                  auth: { type: OIDC }
-                  timeout: 550
-                  body: ${discovered.body}
-                result: fetched
+                    - fetch:
+                        call: http.post
+                        args:
+                          url: ${sys.get_env("FN_FETCH_URL")}
+                          auth: { type: OIDC }
+                          timeout: 550
+                          body: ${discovered.body}
+                        result: fetched
 
-            - extract:
-                call: http.post
-                args:
-                  url: ${sys.get_env("FN_EXTRACT_URL")}
-                  auth: { type: OIDC }
-                  timeout: 550
-                  body: ${fetched.body}
-                result: extracted
+                    - extract:
+                        call: http.post
+                        args:
+                          url: ${sys.get_env("FN_EXTRACT_URL")}
+                          auth: { type: OIDC }
+                          timeout: 550
+                          body: ${fetched.body}
+                        result: extracted
 
-            # fn-load gère les 3 cas : offres valides, mismatch (invalide le
-            # cache d'URL), échec — pas de branchement supplémentaire ici.
-            - load:
-                call: http.post
-                args:
-                  url: ${sys.get_env("FN_LOAD_URL")}
-                  auth: { type: OIDC }
-                  body: ${extracted.body}
+                    # fn-load gère les 3 cas : offres valides, mismatch (invalide
+                    # le cache d'URL), échec — pas de branchement supplémentaire.
+                    - load:
+                        call: http.post
+                        args:
+                          url: ${sys.get_env("FN_LOAD_URL")}
+                          auth: { type: OIDC }
+                          body: ${extracted.body}
+                except:
+                  as: e
+                  steps:
+                    # Échec technique du couple (timeout, 5xx…) : on logge et
+                    # on passe au couple suivant — le run ne casse jamais.
+                    - log_pair_error:
+                        call: http.post
+                        args:
+                          url: ${sys.get_env("FN_LOAD_URL")}
+                          auth: { type: OIDC }
+                          body:
+                            product_id: ${pair.product_id}
+                            competitor_id: ${pair.competitor_id}
+                            resolved: false
+                            stage: "workflow_error"
+                            reason: ${json.encode_to_string(e)}
+                    - next_pair:
+                        next: continue
 
     - done:
         return: "ok"
